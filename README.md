@@ -2,4 +2,4 @@
 Set of linguist metrics 
 
 # Install
-pip install git+git://github.com/vwoloszyn/pylinguistics/pylinguistics.git
+pip install git+git://github.com/vwoloszyn/pylinguistics.git
