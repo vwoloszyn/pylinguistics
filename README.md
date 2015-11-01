@@ -1,4 +1,4 @@
-# pylinguistic
+# pylinguistics
 Set of linguist metrics 
 
 # Install
