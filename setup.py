@@ -19,17 +19,17 @@ import os
 from setuptools import setup, find_packages
 from pip.req import parse_requirements
 
-install_reqs = parse_requirements(<requirements_path>)
-reqs = [str(ir.req) for ir in install_reqs]
+with open('requirements.txt') as f:
+    required = f.read().splitlines()
 
-setup(name='PyLinguistics',
-      version='1.0',
+setup(name='pylinguistics',
+      version='0.5',
       description='Python Distribution Utilities',
       author='Vinicius Woloszyn',
       author_email='vinicius@open.inf.br',
       url='http://inf.ufrgs.br/~vwoloszyn/',
-      packages=['distutils', 'distutils.command'],
+      packages = find_packages(),
       license="GPLv3",
-      install_requires =reqs
+      install_requires =required,
 
      )
