@@ -1,6 +1,5 @@
 Jinja2==2.8
 MarkupSafe==0.23
-PAM==0.4.2
 Pillow==2.9.0
 PyJWT==1.0.0
 PyMySQL==0.6.2
