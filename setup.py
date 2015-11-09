@@ -19,6 +19,9 @@ import os
 from setuptools import setup, find_packages
 from pip.req import parse_requirements
 
+install_reqs = parse_requirements(<requirements_path>)
+reqs = [str(ir.req) for ir in install_reqs]
+
 setup(name='PyLinguistics',
       version='1.0',
       description='Python Distribution Utilities',
@@ -27,7 +30,6 @@ setup(name='PyLinguistics',
       url='http://inf.ufrgs.br/~vwoloszyn/',
       packages=['distutils', 'distutils.command'],
       license="GPLv3",
-      install_requires = [str(ir.req)
-                        for ir in parse_requirements('requirements.txt')]
+      install_requires =reqs
 
      )
