@@ -28,7 +28,7 @@ setup(name='pylinguistics',
       author='Vinicius Woloszyn',
       author_email='vinicius@open.inf.br',
       url='http://inf.ufrgs.br/~vwoloszyn/',
-      packages = ['pylinguistics']),
+      packages = ['pylinguistics'],
       license="GPLv3",
       install_requires =required,
 
