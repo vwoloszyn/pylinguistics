@@ -75,7 +75,8 @@ class pylinguistics:
     def sentence_count (self, texto):
         x=0
         try:
-            x= textstat.sentence_count(texto)
+	        tokenized_sentences = nltk.sent_tokenize(texto)
+	        x= len(tokenized_sentences)
         except:
             x=0
         return x
