@@ -23,7 +23,7 @@ with open('requirements.txt') as f:
     required = f.read().splitlines()
 
 setup(name='pylinguistics',
-      version='0.51',
+      version='0.52',
       description='Python Distribution Utilities',
       author='Vinicius Woloszyn',
       author_email='vinicius@open.inf.br',
