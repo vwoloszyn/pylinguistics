@@ -34,8 +34,8 @@ class pylinguistics:
         self.word_count = descriptive.word_count(self)
         self.sentence_count = descriptive.sentence_count(self)
         self.avg_word_per_sentence = descriptive.avg_word_per_sentence(self)
-        self.syllable_count = descriptive.syllable_count(self)    
-        self.avg_syllables_per_word = descriptive.avg_syllables_per_word(self)
+        #self.syllable_count = descriptive.syllable_count(self)    
+        #self.avg_syllables_per_word = descriptive.avg_syllables_per_word(self)
 
         return self
                 
@@ -69,9 +69,9 @@ class pylinguistics:
         print ('1. Descriptive')
         print ('  Word count=%i' %self.word_count)
         print ('  Sentence count=%i' %self.sentence_count)
-        print ('  Syllable count=%i' % self.syllable_count)
+        #print ('  Syllable count=%i' % self.syllable_count)
         print ('  Avg word per sentence=%f'%self.avg_word_per_sentence)
-        print ('  Avg syllable per word=%f' % self.avg_syllables_per_word)
+        #print ('  Avg syllable per word=%f' % self.avg_syllables_per_word)
 
         print ('2. Word Information')
         print ('  Adjective incidence=%f' % self.adjectiveIncidence())
