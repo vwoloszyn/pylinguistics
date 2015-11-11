@@ -25,9 +25,12 @@ class pylinguistics:
         self.tokens=[]
         self.postag=[]
 
-        self.text = text.decode('utf-8','ignore')
+        self.text = text
+        #.decode('utf-8','ignore')
         self.tokens = tools.getTokens(text)
-        self.postag = tools.getPosTag(self)
+
+        #optimization
+        #self.postag = tools.getPosTag(self)
 
        
         #Descriptive counts       
@@ -152,7 +155,7 @@ class pylinguistics:
         return redability.calcAmbiquity(self)
     
     #correctness
-    
+
 
 
 
