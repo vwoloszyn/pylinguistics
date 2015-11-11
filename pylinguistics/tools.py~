@@ -12,9 +12,7 @@ def getTokens(text):
     return tokens
 
 def getPosTag(tokens):
-
+	
 	##if (idiom == "en"): 
-
+	
 	return nltk.pos_tag(tokens)
-
-
