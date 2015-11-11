@@ -1,0 +1,9 @@
+setup.py
+pylinguistics.egg-info/PKG-INFO
+pylinguistics.egg-info/SOURCES.txt
+pylinguistics.egg-info/dependency_links.txt
+pylinguistics.egg-info/pbr.json
+pylinguistics.egg-info/requires.txt
+pylinguistics.egg-info/top_level.txt
+src/pylinguistics/__init__.py
+src/pylinguistics/pylinguistics.py
