@@ -43,27 +43,6 @@ class pylinguistics:
         self.language=strLanguage
 
 
-    def adjectiveIncidence(self):
-        return wordInformation.adjectiveIncidence(self)
-
-    def nounIncidence(self):
-        return wordInformation.nounIncidence(self)
-
-    def verbIncidence(self):
-        return wordInformation.verbIncidence(self)
-
-
-
-    def contentDensity(self):
-        return disfluencies.contentDensity(self)
-
-
-    def redability(self):
-        return redability.redability(self)
-
-    def calcAmbiquity(self):
-        return redability.calcAmbiquity(self)
-    
 
     def summary(self):
         print ('1. Descriptive')
@@ -86,6 +65,102 @@ class pylinguistics:
         print ('  Ambiquity=%f' % self.calcAmbiquity())
 
         #print (self.postag)
+
+
+
+
+
+
+    ###METRICS
+
+    ###########################
+    ### Word Information ######
+    ###########################
+
+    def adjectiveIncidence(self):
+        return wordInformation.adjectiveIncidence(self)
+
+    def nounIncidence(self):
+        return wordInformation.nounIncidence(self)
+
+    def verbIncidence(self):
+        return wordInformation.verbIncidence(self)
+
+
+    #Pronoun incidence
+    #Age of acquisition for content words, mean
+    #Familiarity for content words, mean
+    #Concreteness for content words, mean
+    #magability for content words, mean
+    #Meaningfulness, Colorado norms, content words, mean
+    #Polysemy for content words, mean
+    #Hypernymy for nouns, mean
+    #Hypernymy for verbs, mean
+    #Hypernymy for nouns and verbs, mean
+
+
+
+    ####################################
+    ### Syntactic Pattern Density ######
+    ####################################
+
+    def contentDensity(self):
+        return disfluencies.contentDensity(self)
+
+
+    #Negation density, incidence
+    #Gerund density, incidence
+    #Infinitive density, incidence
+
+
+
+
+    ####################################
+    ### Connectives ####################
+    ####################################
+
+    #All connectives incidence
+    #Causal connectives incidence
+    #Logical connectives incidence
+    #Adversative and contrastive connectives incidence
+    #Temporal connectives incidence
+    #Additive connectives incidence
+    #Positive connectives incidence
+    #Negative connectives incidence
+
+
+    ####################################
+    ### Referential Cohesion ###########
+    ####################################
+
+    #Noun overlap, adjacent sentences,
+    #Argument overlap, adjacent sentences,
+    #Noun overlap, all sentences
+    #Argument overlap, all sentences
+    #Content word overlap, adjacent sentences,
+    #Content word overlap, all sentences,
+
+
+    ####################################
+    ### Redability  ####################
+    ####################################
+
+    def redability(self):
+        return redability.redability(self)
+
+    def calcAmbiquity(self):
+        return redability.calcAmbiquity(self)
+    
+
+
+
+
+
+
+
+
+
+
 
 
 
