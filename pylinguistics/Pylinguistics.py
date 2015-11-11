@@ -151,7 +151,8 @@ class pylinguistics:
     def calcAmbiquity(self):
         return redability.calcAmbiquity(self)
     
-
+    #correctness
+    
 
 
 
