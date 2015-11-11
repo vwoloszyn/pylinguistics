@@ -27,13 +27,13 @@ class pylinguistics:
         return None
 
     def text(self, text):
-        self.idiom="en"
+        self.language="en"
         self.tokens=[]
         self.postag=[]
 
         self.text = text.decode('utf-8','ignore')
         self.tokens = tools.getTokens(text)
-        self.postag = tools.getPosTag(self.tokens)
+        self.postag = tools.getPosTag(self)
 
         self.number_diff_words = 0 #to be calculated
         #should frequency and top words be included?
@@ -47,8 +47,8 @@ class pylinguistics:
 
         return self
         
-    def setidiom(strIdiom):
-        self.idiom=strIdiom
+    def setLanguage(strLanguage):
+        self.language=strLanguage
 
 
     def summary(self):

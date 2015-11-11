@@ -1,4 +1,9 @@
 import nltk
+
+#import sys
+#sys.path.append("./resc/nlpnet")
+#import nlpnet
+
 from nltk.tokenize import sent_tokenize
 
 def getTokens(text): 
@@ -11,10 +16,10 @@ def getTokens(text):
 
     return tokens
 
-def getPosTag(tokens):
+def getPosTag(pylinguistObj):
 
-	##if (idiom == "en"): 
-
-	return nltk.pos_tag(tokens)
+	#if (idiom == "en"): 
+	return nltk.pos_tag(pylinguistObj.tokens)
+	#else:
 
 
