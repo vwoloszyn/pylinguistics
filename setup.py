@@ -23,12 +23,12 @@ with open('requirements.txt') as f:
     required = f.read().splitlines()
 
 setup(name='pylinguistics',
-      version='0.5',
+      version='0.52',
       description='Python Distribution Utilities',
       author='Vinicius Woloszyn',
       author_email='vinicius@open.inf.br',
       url='http://inf.ufrgs.br/~vwoloszyn/',
-      packages = find_packages(),
+      packages = ['pylinguistics'],
       license="GPLv3",
       install_requires =required,
 
