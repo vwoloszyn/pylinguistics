@@ -16,7 +16,11 @@ def adjectiveIncidence(pylinguistObj):
 			nAdjective +=1
 
 	adjectiveIncidence=0
-	adjectiveIncidence = nAdjective / float(len(pylinguistObj.postag))*1000
+	try:
+		adjectiveIncidence = nAdjective / float(len(pylinguistObj.postag))*1000
+	except:
+		adjectiveIncidence = 0
+
 	return adjectiveIncidence
 
 
@@ -32,8 +36,11 @@ def nounIncidence(pylinguistObj):
 			nNoun +=1
 	#print('adjective %i' %nAdjective)
 	noumIncidence=0
+	try:
+		noumIncidence = nNoun / float(len(pylinguistObj.postag))*1000
+	except:
+		noumIncidence = 0
 
-	noumIncidence = nNoun / float(len(pylinguistObj.postag))*1000
 	return noumIncidence
 
 
@@ -51,6 +58,10 @@ def verbIncidence(pylinguistObj):
 	#print('adjective %i' %nAdjective)
 	verbIncidence=0
 
-	verbIncidence = nVerb / float(len(pylinguistObj.postag))*1000
+	try:
+		verbIncidence = nVerb / float(len(pylinguistObj.postag))*1000
+	except:
+		verbIncidence = 0
+	
 	return verbIncidence
 
