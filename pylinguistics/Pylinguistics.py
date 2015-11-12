@@ -29,9 +29,12 @@ class pylinguistics:
         for word, tag in tagged_text:
             self.tokens.append(word)
         self.postag=postag
-        
+
     def text(self, text):
         
+        self.language="en"
+        self.tokens=[]
+        self.postag=[]
 
         self.text = text
         #.decode('utf-8','ignore')
