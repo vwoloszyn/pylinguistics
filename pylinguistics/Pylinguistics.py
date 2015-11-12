@@ -18,19 +18,27 @@ def text(text):
 class pylinguistics:
 
     def __init__(self):
-        return None
-
-    def text(self, text):
         self.language="en"
         self.tokens=[]
         self.postag=[]
+
+        return None
+
+
+    def from_pos_tag(self, postag):
+        for word, tag in tagged_text:
+            self.tokens.append(word)
+        self.postag=postag
+        
+    def text(self, text):
+        
 
         self.text = text
         #.decode('utf-8','ignore')
         self.tokens = tools.getTokens(text)
 
         #optimization
-        #self.postag = tools.getPosTag(self)
+        self.postag = tools.getPosTag(self)
 
        
         #Descriptive counts       
