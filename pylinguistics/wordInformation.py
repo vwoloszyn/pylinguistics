@@ -4,7 +4,7 @@ import tools
 
 def adjectiveIncidence(pylinguistObj):
 	if (pylinguistObj.postag == []):
-		pylinguistObj.postag = tools.getPosTag(pylinguistObj.tokens)
+		pylinguistObj.postag = tools.getPosTag(pylinguistObj)
 
 
 	nAdjective=0
@@ -26,7 +26,7 @@ def adjectiveIncidence(pylinguistObj):
 
 def nounIncidence(pylinguistObj):
 	if (pylinguistObj.postag == []):
-		pylinguistObj.postag= tools.getPosTag(pylinguistObj.tokens)
+		pylinguistObj.postag= tools.getPosTag(pylinguistObj)
 
 	nNoun=0
 	for tag in pylinguistObj.postag:
@@ -47,7 +47,7 @@ def nounIncidence(pylinguistObj):
 
 def verbIncidence(pylinguistObj):
 	if (pylinguistObj.postag == []):
-		pylinguistObj.postag= tools.getPosTag(pylinguistObj.tokens)
+		pylinguistObj.postag= tools.getPosTag(pylinguistObj)
 
 	nVerb=0
 	for tag in pylinguistObj.postag:

@@ -6,7 +6,7 @@ import tools
 
 def contentDensity(pylinguistObj):
     if (pylinguistObj.postag == []):
-        pylinguistObj.postag= tools.getPosTag(pylinguistObj.tokens)
+        pylinguistObj.postag= tools.getPosTag(pylinguistObj)
     
     nVerb=0
     nNoun=0

@@ -34,7 +34,7 @@ def calc_flesch_kincaid_grade (pylinguistObj):
 
 def calcAmbiquity(pylinguistObj):
     if (pylinguistObj.postag == []):
-        pylinguistObj.postag= tools.getPosTag(self.tokens)
+        pylinguistObj.postag= tools.getPosTag(pylinguistObj)
 
 
     nVerb=0

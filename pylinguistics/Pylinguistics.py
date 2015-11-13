@@ -1,4 +1,5 @@
-# Fibonacci numbers module
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 
 
@@ -18,11 +19,11 @@ def text(text):
 class pylinguistics:
 
     def __init__(self):
-        self.language="en"
+        self.language="pt-br"
         self.tokens=[]
         self.postag=[]
 
-        return None
+        #return None
 
 
     def from_pos_tag(self, postag):
@@ -32,7 +33,6 @@ class pylinguistics:
 
     def text(self, text):
         
-        self.language="en"
         self.tokens=[]
         self.postag=[]
 
@@ -53,8 +53,9 @@ class pylinguistics:
 
         return self
                 
-    def setLanguage(strLanguage):
+    def setLanguage(self, strLanguage):
         self.language=strLanguage
+        print("language: %s" %self.language)
 
 
 
