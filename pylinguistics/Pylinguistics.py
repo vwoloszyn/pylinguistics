@@ -38,7 +38,7 @@ class pylinguistics:
 
         self.text = text
         #.decode('utf-8','ignore')
-        self.tokens = tools.getTokens(text)
+        self.tokens = tools.getTokens(self)
 
         #optimization
         self.postag = tools.getPosTag(self)

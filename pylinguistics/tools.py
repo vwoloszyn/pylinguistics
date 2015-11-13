@@ -34,18 +34,22 @@ def load_tagger(language):
 			#nltk.corpus.mac_morpho.tagged_words()
 
 			tsents = nltk.corpus.mac_morpho.tagged_sents()
-			tsents = [[(w.lower(), t.upper()) for (w,t) in sent] for sent in tsents if sent]
+			tsents = [[(w.lower(), t.upper()) for (w,t) in sent if w.strip() != ""] for sent in tsents if sent]
 			train = tsents
-			#[100:]
+			print train[100:]
 			#print(train)
 			tagger.train(train, 'portuguese_tags.pickle')
 			tagger.load('portuguese_tags.pickle')
 
 
-def getTokens(text):
+def getTokens(pylinguistObj):
 	try:
-		#if (text.strip() !=""):
-		return nltk.word_tokenize(text.decode('ascii','ignore'))
+		if (pylinguistObj.language == "pt-br"):
+			#Python understands the common character encoding used for Portuguese, ISO 8859-1 (ISO Latin 1).
+			return nltk.word_tokenize(text.encode('iso-8859-1'))
+			#.decode('iso-8859-1')
+		else:
+			return nltk.word_tokenize(text.decode('ascii','ignore'))
 	except:
 		return [] 
 
