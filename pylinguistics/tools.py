@@ -27,13 +27,13 @@ def load_tagger(language):
 			nltk.download('mac_morpho')
 			nltk.download('floresta')
 			
-			print('traing portuguese.pickle')
+			print('training portuguese.pickle')
 			#train = [[('today','NN'),('is','VBZ'),('good','JJ'),('day','NN')],[('yes','NNS'),('it','PRP'),('beautiful','JJ')]]
 			#train=[('Um', '>N+art'), ('revivalismo', 'H+n'), ('refrescante', 'N<+adj'), ('O', '>N+art'), ('7_e_Meio', 'H+prop'), ('\xc3\xa9', 'P+v-fin'), ('um', '>N+art'), ('ex-libris', 'H+n'), ('de', 'H+prp'), ('a', '>N+art')]
 			#train = nltk.corpus.mac_morpho.tagged_words()
 			#nltk.corpus.mac_morpho.tagged_words()
 
-			tsents = nltk.corpus.floresta.tagged_sents()
+			tsents = nltk.corpus.mac_morpho.tagged_sents()
 			tsents = [[(w.lower(), t.upper()) for (w,t) in sent] for sent in tsents if sent]
 			train = tsents
 			#[100:]
