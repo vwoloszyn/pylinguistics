@@ -84,6 +84,18 @@ class pylinguistics:
 
 
 
+    def getFeatures(self):
+        features={}
+
+        features['word_count'] = self.word_count
+        features['adjectiveIncidence'] = self.adjectiveIncidence()
+        features['nounIncidence'] = self.nounIncidence()
+        features['verbIncidence'] = self.verbIncidence()
+        features['contentDensity'] = self.contentDensity()
+        features['redability'] = self.redability()
+        
+        return features        
+
 
 
     ###METRICS

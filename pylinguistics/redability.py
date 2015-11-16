@@ -11,7 +11,7 @@ def redability(pylinguistObj):
     return min(calc_flesch_kincaid_grade(pylinguistObj), calc_coleman_liau_index(pylinguistObj))
 
 def calc_coleman_liau_index (pylinguistObj):
-    texto = pylinguistObj.text.decode('utf-8','ignore')
+    texto = pylinguistObj.text
     x=0
     try:
         x= textstat.coleman_liau_index(texto)
@@ -20,7 +20,7 @@ def calc_coleman_liau_index (pylinguistObj):
     return x
 
 def calc_flesch_kincaid_grade (pylinguistObj):
-    texto = pylinguistObj.text.decode('utf-8','ignore')
+    texto = pylinguistObj.text
     x=0
     try:
         ASL = textstat.avg_sentence_length(texto)

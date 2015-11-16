@@ -1,13 +1,18 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 import nltk
 import nltk.tag
 from nltk.tag.perceptron import PerceptronTagger
 from nltk.tokenize import sent_tokenize
+import re
 
 
 
 tagger = None
 
 def load_tagger(language):
+	print('LOAD TAGGER....')
 	global tagger
 	if (language=="en"):
 		tagger = PerceptronTagger()
@@ -19,7 +24,12 @@ def load_tagger(language):
 			tagger.load('portuguese_tags.pickle')
 			#print(tagger.tag('hoje eu vou comer um sanduiche'.split()))
 		except:
-		
+
+
+			# The tagset consists of the following 12 coarse tags:
+
+
+
 			import nltk.corpus
 			import ast
 			#from nltk.corpus import floresta
@@ -32,26 +42,29 @@ def load_tagger(language):
 			#train=[('Um', '>N+art'), ('revivalismo', 'H+n'), ('refrescante', 'N<+adj'), ('O', '>N+art'), ('7_e_Meio', 'H+prop'), ('\xc3\xa9', 'P+v-fin'), ('um', '>N+art'), ('ex-libris', 'H+n'), ('de', 'H+prp'), ('a', '>N+art')]
 			#train = nltk.corpus.mac_morpho.tagged_words()
 			#nltk.corpus.mac_morpho.tagged_words()
-
+			#.decode('utf-8')
 			tsents = nltk.corpus.mac_morpho.tagged_sents()
-			tsents = [[(w.lower(), t.upper()) for (w,t) in sent if w.strip() != ""] for sent in tsents if sent]
+			tsents = [[(clear_string(w.encode('ascii','ignore')).lower(), t.upper()) for (w,t) in sent if w.encode('ascii','ignore').strip() != ""] for sent in tsents if sent]
 			train = tsents
-			print train[100:]
+			#print train[100:]
 			#print(train)
 			tagger.train(train, 'portuguese_tags.pickle')
 			tagger.load('portuguese_tags.pickle')
 
 
 def getTokens(pylinguistObj):
-	try:
+	#try:
 		if (pylinguistObj.language == "pt-br"):
 			#Python understands the common character encoding used for Portuguese, ISO 8859-1 (ISO Latin 1).
-			return nltk.word_tokenize(text.encode('iso-8859-1'))
+			tokens = nltk.word_tokenize(clear_string(pylinguistObj.text.encode('utf-8','ignore')).lower().decode('ascii','ignore'))
+
+			
+			return tokens
 			#.decode('iso-8859-1')
 		else:
-			return nltk.word_tokenize(text.decode('ascii','ignore'))
-	except:
-		return [] 
+			return nltk.word_tokenize(pylinguistObj.text)
+	#except:
+	#	return [] 
 
     #check lenght words
     #tokens = [w.lower() for w in tokens if len(w)<20]
@@ -64,19 +77,70 @@ def getPosTag(pylinguistObj):
 	if tagger is None:
 		load_tagger(pylinguistObj.language)
 
-	print('tokens')
+	#print('tokens')
 	#print(getTokens('hoje eu vou comer um sanduiche'))
-	print(tagger.tag(getTokens('hoje eu vou comer um sanduiche')))
+	#print(tagger.tag(getTokens('hoje eu vou comer um sanduiche')))
 
 
-	print(pylinguistObj.tokens)
+	#print(pylinguistObj.tokens)
 	#tags=nltk.tag._pos_tag(pylinguistObj.tokens, None, tagger)
-
+	#print(pylinguistObj.tokens)
 	tags=tagger.tag(pylinguistObj.tokens)
-	print(tags)
-	return tags
+
+			# VERB - verbs (all tenses and modes)
+			# NOUN - nouns (common and proper)
+			# PRON - pronouns
+			# ADJ - adjectives
+			# ADV - adverbs
+			# ADP - adpositions (prepositions and postpositions)
+			# CONJ - conjunctions
+			# DET - determiners
+			# NUM - cardinal numbers
+			# PRT - particles or other function words
+			# X - other: foreign words, typos, abbreviations
+			# . - punctuation
+
+	#retaging
+	#if (pylinguistObj.language=="pt-br"):
+	dic ={"PREP|+":"ADP","ADJ":"ADJ","ADV-KS":"ADV","ART":"DET","ADV":"ADV","ADV-KS-REL":"ADV","KC":"CONJ","KS":"CONJ","IN":"X","N":"NOUN",\
+		"NPROP":"NOUN","NUM":"NUM","PCP":"PRT","PDEN":"X","PREP":"ADP","PROADJ":"PRON","PRO-KS":"PRON","PROPESS":"PRON","PRO-KS-REL":"PRON",\
+		"PROSUB":"PRON","V":"VERB","VAUX":"VERB","CUR":"X","|EST":"X","|AP":"X","|DAD":"X","PREP+ART":"ADP","PREP+PROPESS":"ADP","PREP+ADV":"ADP",\
+		"PREP+PROADJ":"ADP","PREP+PRO-KS-REL":"ADP","PREP+PROSUB":"ADP","PU":".","-":".",",":".",}
+
+	newtag = []
+	for c in tags:
+		newtag.append((c[0], dic.get(str(c[1]),str(c[1]))))
+
+	#print(newtag)
+	return newtag
 	#except:
 	#	print('error on getPosTag')
 	#	return []
 
 
+
+
+
+
+
+
+def clear_string(value):
+	#dic={"Á":"A","À":"A","Ã":"A","É":"E","Ê":"E","Í":"I","Ó":"O","Õ":"O","Ô":"O","Ú":"","Ç":"C","á":"a","à":"a","ã":"a","é":"e","ê":"e","í":"i","ó":"o","õ":"o","ô":"o","ú":"","ç":"c"}
+	#value=""
+	#for c in string:
+	#print('c:'+c)
+	#replaced+=dic.get(c,c)
+	value = re.sub('à', "a", value)
+	value = re.sub('é', "e", value)
+	value = re.sub('ã', "a", value)
+	value = re.sub('%', "Porc", value)
+	value = re.sub('ó', "o", value)
+	value = re.sub('í', "i", value)
+	value = re.sub('ê', "e", value)
+	value = re.sub('ç', "c", value)
+	value = re.sub('õ', "o", value)
+	value = re.sub('ú', "u", value)
+	value = re.sub('á', "a", value)
+	#value = re.sub('$', "", value)
+
+	return value
