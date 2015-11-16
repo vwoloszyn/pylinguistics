@@ -15,6 +15,25 @@ import tools
 # . - punctuation
 
 
+    ###########################
+    ### Word Information ######
+    ###########################
+
+
+    #Pronoun incidence
+    #Age of acquisition for content words, mean
+    #Familiarity for content words, mean
+    #Concreteness for content words, mean
+    #magability for content words, mean
+    #Meaningfulness, Colorado norms, content words, mean
+    #Polysemy for content words, mean
+    #Hypernymy for nouns, mean
+    #Hypernymy for verbs, mean
+    #Hypernymy for nouns and verbs, mean
+
+
+
+
 def adjectiveIncidence(pylinguistObj):
 	if (pylinguistObj.postag == []):
 		pylinguistObj.postag = tools.getPosTag(pylinguistObj)
@@ -31,7 +50,7 @@ def adjectiveIncidence(pylinguistObj):
 
 	adjectiveIncidence=0
 	try:
-		adjectiveIncidence = nAdjective / float(len(pylinguistObj.postag))*1000
+		adjectiveIncidence = nAdjective / (float(len(pylinguistObj.postag))/1000)
 	except:
 		adjectiveIncidence = 0
 
@@ -52,7 +71,7 @@ def nounIncidence(pylinguistObj):
 	#print('adjective %i' %nAdjective)
 	noumIncidence=0
 	try:
-		noumIncidence = nNoun / float(len(pylinguistObj.postag))*1000
+		noumIncidence = nNoun / (float(len(pylinguistObj.postag))/1000)
 	except:
 		noumIncidence = 0
 
@@ -75,9 +94,107 @@ def verbIncidence(pylinguistObj):
 	verbIncidence=0
 
 	try:
-		verbIncidence = nVerb / float(len(pylinguistObj.postag))*1000
+		verbIncidence = nVerb / (float(len(pylinguistObj.postag))/1000)
 	except:
 		verbIncidence = 0
 	
 	return verbIncidence
+
+
+def advIncidence(pylinguistObj):
+	if (pylinguistObj.postag == []):
+		pylinguistObj.postag= tools.getPosTag(pylinguistObj)
+
+	nADV=0
+	for tag in pylinguistObj.postag:
+		word = tag[0]
+		word_clas = tag[1]
+		#if word_clas == "VB" or word_clas == "VBD" or word_clas == "VBG" or word_clas == "VBN" or word_clas == "VBP" or word_clas == "VBZ" :
+		if word_clas == "ADV":
+			nADV +=1
+	#print('adjective %i' %nAdjective)
+	advIncidence=0
+
+	try:
+		advIncidence = nADV / (float(len(pylinguistObj.postag))/1000)
+	except:
+		advIncidence = 0
+	
+	return advIncidence
+
+
+def pronIncidence(pylinguistObj):
+	if (pylinguistObj.postag == []):
+		pylinguistObj.postag= tools.getPosTag(pylinguistObj)
+
+	nPRON=0
+	for tag in pylinguistObj.postag:
+		word = tag[0]
+		word_clas = tag[1]
+		#if word_clas == "VB" or word_clas == "VBD" or word_clas == "VBG" or word_clas == "VBN" or word_clas == "VBP" or word_clas == "VBZ" :
+		if word_clas == "PRON":
+			nPRON +=1
+	#print('adjective %i' %nAdjective)
+	pronIncidence=0
+
+	try:
+		pronIncidence = nPRON / (float(len(pylinguistObj.postag))/1000)
+	except:
+		pronIncidence = 0
+	
+	return pronIncidence
+
+
+def contentIncidence(pylinguistObj):
+	if (pylinguistObj.postag == []):
+		pylinguistObj.postag= tools.getPosTag(pylinguistObj)
+
+	count=0
+	for tag in pylinguistObj.postag:
+		word = tag[0]
+		word_clas = tag[1]
+		#if word_clas == "VB" or word_clas == "VBD" or word_clas == "VBG" or word_clas == "VBN" or word_clas == "VBP" or word_clas == "VBZ" :
+		if word_clas == "VERB" or word_clas == "NOUN" or word_clas == "ADJ" or word_clas == "ADV" :
+			count +=1
+	#print('adjective %i' %nAdjective)
+	incidence=0
+
+	try:
+		incidence = count / (float(len(pylinguistObj.postag))/1000)
+	except:
+		incidence = 0
+	
+	return incidence
+
+
+def functionalIncidence(pylinguistObj):
+	if (pylinguistObj.postag == []):
+		pylinguistObj.postag= tools.getPosTag(pylinguistObj)
+
+	count=0
+	for tag in pylinguistObj.postag:
+		word = tag[0]
+		word_clas = tag[1]
+		#if word_clas == "VB" or word_clas == "VBD" or word_clas == "VBG" or word_clas == "VBN" or word_clas == "VBP" or word_clas == "VBZ" :
+		if word_clas == "DET" or word_clas == "ADP" or word_clas == "PRON" or word_clas == "CONJ" :
+			count +=1
+	#print('adjective %i' %nAdjective)
+	incidence=0
+
+	try:
+		incidence = count / (float(len(pylinguistObj.postag))/1000)
+	except:
+		incidence = 0
+	
+	return incidence
+
+def typeTokensRatio(pylinguistObj):
+
+	tools.getTypes(pylinguistObj)
+	ntypes = len(pylinguistObj.types)
+	ntokens = len(pylinguistObj.tokens)
+	#print('ntypes: %i, ntokens: %i' %(ntypes,ntokens))
+	return float(ntypes)/float(ntokens)
+
+
 

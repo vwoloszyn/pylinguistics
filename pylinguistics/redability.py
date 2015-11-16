@@ -11,24 +11,32 @@ def redability(pylinguistObj):
     return min(calc_flesch_kincaid_grade(pylinguistObj), calc_coleman_liau_index(pylinguistObj))
 
 def calc_coleman_liau_index (pylinguistObj):
+    ###VERIFICAR
     texto = pylinguistObj.text
     x=0
     try:
-        x= textstat.coleman_liau_index(texto)
+        L = round(pylinguistObj.avg_letter_per_word(text)*100, 2)
+        S = round(pylinguistObj.avg_sentence_per_word(text)*100, 2)
+
+        CLI = float((0.058 * L) - (0.296 * S) - 15.8)
+
+        x= round(CLI, 2)
     except:
         x=0
     return x
 
+
 def calc_flesch_kincaid_grade (pylinguistObj):
-    texto = pylinguistObj.text
+    #texto = pylinguistObj.text
     x=0
     try:
-        ASL = textstat.avg_sentence_length(texto)
-        ASW = textstat.avg_syllables_per_word(texto)
-        FKRA = float(0.39 * ASL) + float(11.8 * ASW) - 15.59
+        ASL = pylinguistObj.avg_word_per_sentence
+        ASW = pylinguistObj.avg_syllables_per_word
+        FKRA = (0.39 * ASL) + (11.8 * ASW) - 15.59
         x= round(FKRA, 1)
-    except:
+    except ValueError:
         x=0
+        print('ERROR :'+ValueError)
     return x
 
 

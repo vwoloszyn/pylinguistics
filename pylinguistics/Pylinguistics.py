@@ -8,7 +8,7 @@ import redability
 import descriptive
 import wordInformation
 import disfluencies
-
+import logic_operators
 
 
 def text(text):
@@ -21,6 +21,7 @@ class pylinguistics:
     def __init__(self):
         self.language="pt-br"
         self.tokens=[]
+        self.types=[]
         self.postag=[]
 
         #return None
@@ -32,7 +33,7 @@ class pylinguistics:
         self.postag=postag
 
     def text(self, text):
-        
+        self.types=[]
         self.tokens=[]
         self.postag=[]
 
@@ -87,12 +88,34 @@ class pylinguistics:
     def getFeatures(self):
         features={}
 
-        features['word_count'] = self.word_count
-        features['adjectiveIncidence'] = self.adjectiveIncidence()
-        features['nounIncidence'] = self.nounIncidence()
-        features['verbIncidence'] = self.verbIncidence()
-        features['contentDensity'] = self.contentDensity()
-        features['redability'] = self.redability()
+        features['word_count'] = descriptive.word_count(self)
+        features['sentence_count'] = descriptive.sentence_count(self)
+        features['avg_word_per_sentence'] = descriptive.avg_word_per_sentence(self)
+        features['syllable_count'] = descriptive.syllable_count(self)
+        features['avg_syllables_per_word'] = descriptive.avg_syllables_per_word(self)
+
+
+        features['adjectiveIncidence'] = wordInformation.adjectiveIncidence(self)
+        features['nounIncidence'] = wordInformation.nounIncidence(self)
+        features['verbIncidence'] = wordInformation.verbIncidence(self)
+        features['advIncidence'] = wordInformation.advIncidence(self)
+        features['pronIncidence'] = wordInformation.pronIncidence(self)
+        features['contentIncidence'] = wordInformation.contentIncidence(self)
+        features['functionalIncidence'] = wordInformation.functionalIncidence(self)
+        features['LexicalDiveristy'] = wordInformation.typeTokensRatio(self)
+
+
+        features['LogicNegationIncidence'] = logic_operators.LogicNegationIncidence(self)
+        features['LogicIfIncidence'] = logic_operators.LogicIfIncidence(self)
+        features['LogicOrIncidence'] = logic_operators.LogicOrIncidence(self)
+        features['LogicAndIncidence'] = logic_operators.LogicAndIncidence(self)
+        features['LogicOperatorsIncidence'] = logic_operators.LogicOperatorsIncidence(self)
+
+
+
+
+        #features['contentDensity'] = self.contentDensity()
+        features['redability'] = redability.calc_flesch_kincaid_grade(self)
         
         return features        
 
@@ -100,30 +123,7 @@ class pylinguistics:
 
     ###METRICS
 
-    ###########################
-    ### Word Information ######
-    ###########################
 
-    def adjectiveIncidence(self):
-        return wordInformation.adjectiveIncidence(self)
-
-    def nounIncidence(self):
-        return wordInformation.nounIncidence(self)
-
-    def verbIncidence(self):
-        return wordInformation.verbIncidence(self)
-
-
-    #Pronoun incidence
-    #Age of acquisition for content words, mean
-    #Familiarity for content words, mean
-    #Concreteness for content words, mean
-    #magability for content words, mean
-    #Meaningfulness, Colorado norms, content words, mean
-    #Polysemy for content words, mean
-    #Hypernymy for nouns, mean
-    #Hypernymy for verbs, mean
-    #Hypernymy for nouns and verbs, mean
 
 
 

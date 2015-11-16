@@ -52,13 +52,25 @@ def load_tagger(language):
 			tagger.load('portuguese_tags.pickle')
 
 
+def getTypes(pylinguistObj):
+	dic_types={}
+	types=[]
+	for t in pylinguistObj.tokens:
+		dic_types[t]=1
+
+	for w in dic_types:
+		types.append(w)
+
+	pylinguistObj.types = types
+	return types
+
+
 def getTokens(pylinguistObj):
 	#try:
 		if (pylinguistObj.language == "pt-br"):
 			#Python understands the common character encoding used for Portuguese, ISO 8859-1 (ISO Latin 1).
 			tokens = nltk.word_tokenize(clear_string(pylinguistObj.text.encode('utf-8','ignore')).lower().decode('ascii','ignore'))
 
-			
 			return tokens
 			#.decode('iso-8859-1')
 		else:
@@ -105,7 +117,7 @@ def getPosTag(pylinguistObj):
 	dic ={"PREP|+":"ADP","ADJ":"ADJ","ADV-KS":"ADV","ART":"DET","ADV":"ADV","ADV-KS-REL":"ADV","KC":"CONJ","KS":"CONJ","IN":"X","N":"NOUN",\
 		"NPROP":"NOUN","NUM":"NUM","PCP":"PRT","PDEN":"X","PREP":"ADP","PROADJ":"PRON","PRO-KS":"PRON","PROPESS":"PRON","PRO-KS-REL":"PRON",\
 		"PROSUB":"PRON","V":"VERB","VAUX":"VERB","CUR":"X","|EST":"X","|AP":"X","|DAD":"X","PREP+ART":"ADP","PREP+PROPESS":"ADP","PREP+ADV":"ADP",\
-		"PREP+PROADJ":"ADP","PREP+PRO-KS-REL":"ADP","PREP+PROSUB":"ADP","PU":".","-":".",",":".",}
+		"PREP+PROADJ":"ADP","PREP+PRO-KS-REL":"ADP","PREP+PROSUB":"ADP","PU":".","-":".",",":".","N|DAT":"NUM","PREP|+":"ADP"}
 
 	newtag = []
 	for c in tags:
@@ -125,7 +137,6 @@ def getPosTag(pylinguistObj):
 
 
 def clear_string(value):
-	#dic={"Á":"A","À":"A","Ã":"A","É":"E","Ê":"E","Í":"I","Ó":"O","Õ":"O","Ô":"O","Ú":"","Ç":"C","á":"a","à":"a","ã":"a","é":"e","ê":"e","í":"i","ó":"o","õ":"o","ô":"o","ú":"","ç":"c"}
 	#value=""
 	#for c in string:
 	#print('c:'+c)
@@ -141,6 +152,7 @@ def clear_string(value):
 	value = re.sub('õ', "o", value)
 	value = re.sub('ú', "u", value)
 	value = re.sub('á', "a", value)
-	#value = re.sub('$', "", value)
+	value = re.sub('``', "", value)
+	value = re.sub("''", "", value)
 
 	return value
