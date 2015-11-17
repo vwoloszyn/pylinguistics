@@ -38,7 +38,7 @@ def load_tagger(language):
 			#sentencesClean = [[(clear_string(w.encode('ascii','ignore')).lower(), t.upper()) for (w,t) in sent if w.encode('ascii','ignore').strip() != ""] for sent in tsents if sent]
 			#sentences = [[(w.lower(), t.upper()) for (w,t) in sent] for sent in tsents if sent]
 			
-			sentences = [[w.lower(), t.upper()) for (w,t) in sent if w.strip() != ""] for sent in tsents if sent]
+			sentences = [[(w.lower(), t.upper()) for (w,t) in sent if w.strip() != ""] for sent in tsents if sent]
 
 			#sentences = [[(w.lower(), t.upper()) for (w,t) in sent if w.encode('ascii','ignore').strip() != ""] for sent in tsents if sent]
 			#.decode('ISO 8859-1')
