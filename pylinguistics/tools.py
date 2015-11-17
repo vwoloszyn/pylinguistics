@@ -20,16 +20,16 @@ def load_tagger(language):
 		print('tagger pt-br')
 		tagger = PerceptronTagger(load=False)
 		try:
-			print('loading portuguese.pickle')
+			print('Loading portuguese.pickle')
 			tagger.load('portuguese_tags.pickle')
 
 			
 		except:
-
+			print('Error on loading portuguese.pickle')
 			import nltk.corpus
 			import ast, sys
 
-			print('evaluating')
+			print('Creating new tagger model')
 			import nltk.corpus
 
 			tsents = nltk.corpus.mac_morpho.tagged_sents()[:1100000]
@@ -38,7 +38,7 @@ def load_tagger(language):
 			#sentences = [[(clear_string(w.encode('ascii','ignore')).lower(), t.upper()) for (w,t) in sent if w.encode('ascii','ignore').strip() != ""] for sent in tsents if sent]
 			#sentences = [[(w.lower(), t.upper()) for (w,t) in sent if ( w.strip() != "" and t.strip() != "") ] for sent in tsents if sent]
 			sentences = [[(w.lower(),t.upper()) for (w,t) in sent] for sent in tsents if sent]
-			print ('len:%i' %len(tsents))
+			print ('Corpus lenght:%i' %len(tsents))
 
 			train = sentences[int(len(sentences)*0.7):]
 			test = sentences[:int(len(sentences)*0.3)]
@@ -46,44 +46,44 @@ def load_tagger(language):
 			#train = sentences[90000:]
 			#test = sentences[:10000]
 
-			tagger0 = nltk.DefaultTagger('n')
-			tagger1 = nltk.UnigramTagger(train, backoff=tagger0)
-			tagger2 = nltk.BigramTagger(train, backoff=tagger1)
-			evaluate=tagger2.evaluate(test)
+			#tagger0 = nltk.DefaultTagger('n')
+			#tagger1 = nltk.UnigramTagger(train, backoff=tagger0)
+			#tagger2 = nltk.BigramTagger(train, backoff=tagger1)
+			#evaluate=tagger2.evaluate(test)
 			
-			#tagger = nltk.BigramTagger(train)
-			#tagger.train(train)
-			#evaluate=tagger.evaluate(test)
-
-			print('accuracy:%f' %evaluate)
-
-			sys.exit(0)
-
-
-
-
-			import nltk.corpus
-			import ast
-			#from nltk.corpus import floresta
-			import nltk
-			nltk.download('mac_morpho')
-			#nltk.download('floresta')
 			
-			print('training portuguese.pickle')
-			#train = [[('today','NN'),('is','VBZ'),('good','JJ'),('day','NN')],[('yes','NNS'),('it','PRP'),('beautiful','JJ')]]
-			#train=[('Um', '>N+art'), ('revivalismo', 'H+n'), ('refrescante', 'N<+adj'), ('O', '>N+art'), ('7_e_Meio', 'H+prop'), ('\xc3\xa9', 'P+v-fin'), ('um', '>N+art'), ('ex-libris', 'H+n'), ('de', 'H+prp'), ('a', '>N+art')]
-			#train = nltk.corpus.mac_morpho.tagged_words()
-			#nltk.corpus.mac_morpho.tagged_words()
-			#.decode('utf-8')
-			tsents = nltk.corpus.mac_morpho.tagged_sents()
-			tsents = [[(clear_string(w.encode('ascii','ignore')).lower(), t.upper()) for (w,t) in sent if w.encode('ascii','ignore').strip() != ""] for sent in tsents if sent]
-						# sentences = [[(w.lower(), t.upper()) for (w,t) in sent if w.strip() != ""] for sent in tsents if sent]
-
-			train = tsents
-			#print train[100:]
-			#print(train)
 			tagger.train(train, 'portuguese_tags.pickle')
-			tagger.load('portuguese_tags.pickle')
+			evaluate=tagger.evaluate(test)
+
+			print('Model accuracy:%f' %evaluate)
+
+			#sys.exit(0)
+
+
+
+
+			# import nltk.corpus
+			# import ast
+			# #from nltk.corpus import floresta
+			# import nltk
+			# nltk.download('mac_morpho')
+			# #nltk.download('floresta')
+			
+			# print('training portuguese.pickle')
+			# #train = [[('today','NN'),('is','VBZ'),('good','JJ'),('day','NN')],[('yes','NNS'),('it','PRP'),('beautiful','JJ')]]
+			# #train=[('Um', '>N+art'), ('revivalismo', 'H+n'), ('refrescante', 'N<+adj'), ('O', '>N+art'), ('7_e_Meio', 'H+prop'), ('\xc3\xa9', 'P+v-fin'), ('um', '>N+art'), ('ex-libris', 'H+n'), ('de', 'H+prp'), ('a', '>N+art')]
+			# #train = nltk.corpus.mac_morpho.tagged_words()
+			# #nltk.corpus.mac_morpho.tagged_words()
+			# #.decode('utf-8')
+			# tsents = nltk.corpus.mac_morpho.tagged_sents()
+			# tsents = [[(clear_string(w.encode('ascii','ignore')).lower(), t.upper()) for (w,t) in sent if w.encode('ascii','ignore').strip() != ""] for sent in tsents if sent]
+			# 			# sentences = [[(w.lower(), t.upper()) for (w,t) in sent if w.strip() != ""] for sent in tsents if sent]
+
+			# train = tsents
+			# #print train[100:]
+			# #print(train)
+			# tagger.train(train, 'portuguese_tags.pickle')
+			# tagger.load('portuguese_tags.pickle')
 
 
 def getTypes(pylinguistObj):
