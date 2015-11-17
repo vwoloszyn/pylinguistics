@@ -22,6 +22,26 @@ def load_tagger(language):
 		try:
 			print('loading portuguese.pickle')
 			tagger.load('portuguese_tags.pickle')
+
+			print('evaluating')
+			import nltk.corpus
+
+
+
+			tsents = nltk.corpus.mac_morpho.tagged_sents()[:500]
+			print ('len:%i' %len(tsents))
+
+			sentencesClean = [[(clear_string(w.encode('ascii','ignore')).lower(), t.upper()) for (w,t) in sent if w.encode('ascii','ignore').strip() != ""] for sent in tsents if sent]
+			#sentences = [[(w.lower(), t.upper()) for (w,t) in sent] for sent in tsents if sent]
+
+			
+			print(sentences)
+			print(sentencesClean)
+			evaluate=tagger.evaluate(sentences)
+			evaluateClean=tagger.evaluate(sentencesClean)
+
+			print('precision:%f' %evaluate)
+			print('precision with clean:%f' %evaluateClean)
 			#print(tagger.tag('hoje eu vou comer um sanduiche'.split()))
 		except:
 
@@ -69,8 +89,9 @@ def getTokens(pylinguistObj):
 	#try:
 		if (pylinguistObj.language == "pt-br"):
 			#Python understands the common character encoding used for Portuguese, ISO 8859-1 (ISO Latin 1).
-			tokens = nltk.word_tokenize(clear_string(pylinguistObj.text.encode('utf-8','ignore')).lower().decode('ascii','ignore'))
-
+			#tokens = nltk.word_tokenize(clear_string(pylinguistObj.text.encode('utf-8','ignore').lower().decode('ascii','ignore'))
+			tokens = nltk.word_tokenize(pylinguistObj.text.lower())
+			print (tokens)
 			return tokens
 			#.decode('iso-8859-1')
 		else:
@@ -152,7 +173,7 @@ def clear_string(value):
 	value = re.sub('õ', "o", value)
 	value = re.sub('ú', "u", value)
 	value = re.sub('á', "a", value)
-	value = re.sub('``', "", value)
-	value = re.sub("''", "", value)
+	#value = re.sub('\`', "", value)
+	#value = re.sub('\'', "", value)
 
 	return value
