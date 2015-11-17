@@ -26,6 +26,8 @@ def load_tagger(language):
 			
 		except:
 
+			import nltk.corpus
+			import ast
 
 			print('evaluating')
 			import nltk.corpus
@@ -34,14 +36,21 @@ def load_tagger(language):
 			print ('len:%i' %len(tsents))
 
 			#sentencesClean = [[(clear_string(w.encode('ascii','ignore')).lower(), t.upper()) for (w,t) in sent if w.encode('ascii','ignore').strip() != ""] for sent in tsents if sent]
-			sentences = [[(w.lower(), t.upper()) for (w,t) in sent] for sent in tsents if sent]
+			#sentences = [[(w.lower(), t.upper()) for (w,t) in sent] for sent in tsents if sent]
 			
+			sentences = [[(clear_string(w.encode('ascii','ignore')).lower(), t.upper()) for (w,t) in sent if w.encode('ascii','ignore').strip() != ""] for sent in tsents if sent]
+
+			#sentences = [[(w.lower(), t.upper()) for (w,t) in sent if w.encode('ascii','ignore').strip() != ""] for sent in tsents if sent]
+			#.decode('ISO 8859-1')
 			#print(sentences)
 			#print(sentencesClean)
-			evaluate=tagger.evaluate(sentences)
+			train = sentences[3000:]
+			test = sentences[:3000]
+			tagger.train(train)
+			evaluate=tagger.evaluate(test)
 			#evaluateClean=tagger.evaluate(sentencesClean)
 
-			print('precision:%f' %evaluate)
+			print('accuracy:%f' %evaluate)
 			#print('precision with clean:%f' %evaluateClean)
 			#print(tagger.tag('hoje eu vou comer um sanduiche'.split()))
 
