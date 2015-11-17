@@ -44,8 +44,8 @@ def load_tagger(language):
 			#.decode('ISO 8859-1')
 			#print(sentences)
 			#print(sentencesClean)
-			train = sentences[3000:]
-			test = sentences[:3000]
+			train = sentences[sentences*0.7:]
+			test = sentences[:sentences*0.3]
 			tagger.train(train)
 			evaluate=tagger.evaluate(test)
 			#evaluateClean=tagger.evaluate(sentencesClean)
@@ -53,7 +53,7 @@ def load_tagger(language):
 			print('accuracy:%f' %evaluate)
 			#print('precision with clean:%f' %evaluateClean)
 			#print(tagger.tag('hoje eu vou comer um sanduiche'.split()))
-
+			sys.exit(0)
 
 
 
