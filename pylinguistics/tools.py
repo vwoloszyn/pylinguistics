@@ -44,8 +44,8 @@ def load_tagger(language):
 			#.decode('ISO 8859-1')
 			#print(sentences)
 			#print(sentencesClean)
-			train = sentences[sentences*0.7:]
-			test = sentences[:sentences*0.3]
+			train = sentences[int(sentences*0.7):]
+			test = sentences[:int(sentences*0.3)]
 			tagger.train(train)
 			evaluate=tagger.evaluate(test)
 			#evaluateClean=tagger.evaluate(sentencesClean)
