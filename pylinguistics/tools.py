@@ -35,7 +35,7 @@ def load_tagger(language):
 			#from nltk.corpus import floresta
 			import nltk
 			nltk.download('mac_morpho')
-			nltk.download('floresta')
+			#nltk.download('floresta')
 			
 			print('training portuguese.pickle')
 			#train = [[('today','NN'),('is','VBZ'),('good','JJ'),('day','NN')],[('yes','NNS'),('it','PRP'),('beautiful','JJ')]]
