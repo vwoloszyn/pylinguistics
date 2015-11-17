@@ -26,26 +26,38 @@ def load_tagger(language):
 			
 		except:
 
-			# import nltk.corpus
-			# import ast
+			import nltk.corpus
+			import ast, sys
 
-			# print('evaluating')
-			# import nltk.corpus
+			print('evaluating')
+			import nltk.corpus
 
-			# tsents = nltk.corpus.mac_morpho.tagged_sents()
-			# print ('len:%i' %len(tsents))
+			tsents = nltk.corpus.mac_morpho.tagged_sents()[:1100000]
+			#tsents = nltk.corpus.floresta.tagged_sents()
 
-			# #sentences = [[(clear_string(w.encode('ascii','ignore')).lower(), t.upper()) for (w,t) in sent if w.encode('ascii','ignore').strip() != ""] for sent in tsents if sent]
-			# sentences = [[(w.lower(), t.upper()) for (w,t) in sent if w.strip() != ""] for sent in tsents if sent]
+			#sentences = [[(clear_string(w.encode('ascii','ignore')).lower(), t.upper()) for (w,t) in sent if w.encode('ascii','ignore').strip() != ""] for sent in tsents if sent]
+			#sentences = [[(w.lower(), t.upper()) for (w,t) in sent if ( w.strip() != "" and t.strip() != "") ] for sent in tsents if sent]
+			sentences = [[(w.lower(),t.upper()) for (w,t) in sent] for sent in tsents if sent]
+			print ('len:%i' %len(tsents))
 
-			# train = sentences[int(len(sentences)*0.7):]
-			# test = sentences[:int(len(sentences)*0.3)]
-			# tagger.train(train)
-			# evaluate=tagger.evaluate(test)
+			train = sentences[int(len(sentences)*0.7):]
+			test = sentences[:int(len(sentences)*0.3)]
 
-			# print('accuracy:%f' %evaluate)
+			#train = sentences[90000:]
+			#test = sentences[:10000]
 
-			# sys.exit(0)
+			tagger0 = nltk.DefaultTagger('n')
+			tagger1 = nltk.UnigramTagger(train, backoff=tagger0)
+			tagger2 = nltk.BigramTagger(train, backoff=tagger1)
+			evaluate=tagger2.evaluate(test)
+			
+			#tagger = nltk.BigramTagger(train)
+			#tagger.train(train)
+			#evaluate=tagger.evaluate(test)
+
+			print('accuracy:%f' %evaluate)
+
+			sys.exit(0)
 
 
 
@@ -64,8 +76,8 @@ def load_tagger(language):
 			#nltk.corpus.mac_morpho.tagged_words()
 			#.decode('utf-8')
 			tsents = nltk.corpus.mac_morpho.tagged_sents()
-			#tsents = [[(clear_string(w.encode('ascii','ignore')).lower(), t.upper()) for (w,t) in sent if w.encode('ascii','ignore').strip() != ""] for sent in tsents if sent]
-			tsents = [[(w.lower(), t.upper()) for (w,t) in sent if w.strip() != ""] for sent in tsents if sent]
+			tsents = [[(clear_string(w.encode('ascii','ignore')).lower(), t.upper()) for (w,t) in sent if w.encode('ascii','ignore').strip() != ""] for sent in tsents if sent]
+						# sentences = [[(w.lower(), t.upper()) for (w,t) in sent if w.strip() != ""] for sent in tsents if sent]
 
 			train = tsents
 			#print train[100:]
