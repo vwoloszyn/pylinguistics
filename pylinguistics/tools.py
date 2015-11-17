@@ -26,34 +26,26 @@ def load_tagger(language):
 			
 		except:
 
-			import nltk.corpus
-			import ast
+			# import nltk.corpus
+			# import ast
 
-			print('evaluating')
-			import nltk.corpus
+			# print('evaluating')
+			# import nltk.corpus
 
-			tsents = nltk.corpus.mac_morpho.tagged_sents()
-			print ('len:%i' %len(tsents))
+			# tsents = nltk.corpus.mac_morpho.tagged_sents()
+			# print ('len:%i' %len(tsents))
 
-			#sentencesClean = [[(clear_string(w.encode('ascii','ignore')).lower(), t.upper()) for (w,t) in sent if w.encode('ascii','ignore').strip() != ""] for sent in tsents if sent]
-			#sentences = [[(w.lower(), t.upper()) for (w,t) in sent] for sent in tsents if sent]
-			
-			sentences = [[(w.lower(), t.upper()) for (w,t) in sent if w.strip() != ""] for sent in tsents if sent]
+			# #sentences = [[(clear_string(w.encode('ascii','ignore')).lower(), t.upper()) for (w,t) in sent if w.encode('ascii','ignore').strip() != ""] for sent in tsents if sent]
+			# sentences = [[(w.lower(), t.upper()) for (w,t) in sent if w.strip() != ""] for sent in tsents if sent]
 
-			#sentences = [[(w.lower(), t.upper()) for (w,t) in sent if w.encode('ascii','ignore').strip() != ""] for sent in tsents if sent]
-			#.decode('ISO 8859-1')
-			#print(sentences)
-			#print(sentencesClean)
-			train = sentences[int(len(sentences)*0.7):]
-			test = sentences[:int(len(sentences)*0.3)]
-			tagger.train(train)
-			evaluate=tagger.evaluate(test)
-			#evaluateClean=tagger.evaluate(sentencesClean)
+			# train = sentences[int(len(sentences)*0.7):]
+			# test = sentences[:int(len(sentences)*0.3)]
+			# tagger.train(train)
+			# evaluate=tagger.evaluate(test)
 
-			print('accuracy:%f' %evaluate)
-			#print('precision with clean:%f' %evaluateClean)
-			#print(tagger.tag('hoje eu vou comer um sanduiche'.split()))
-			sys.exit(0)
+			# print('accuracy:%f' %evaluate)
+
+			# sys.exit(0)
 
 
 
@@ -72,7 +64,9 @@ def load_tagger(language):
 			#nltk.corpus.mac_morpho.tagged_words()
 			#.decode('utf-8')
 			tsents = nltk.corpus.mac_morpho.tagged_sents()
-			tsents = [[(clear_string(w.encode('ascii','ignore')).lower(), t.upper()) for (w,t) in sent if w.encode('ascii','ignore').strip() != ""] for sent in tsents if sent]
+			#tsents = [[(clear_string(w.encode('ascii','ignore')).lower(), t.upper()) for (w,t) in sent if w.encode('ascii','ignore').strip() != ""] for sent in tsents if sent]
+			tsents = [[(w.lower(), t.upper()) for (w,t) in sent if w.strip() != ""] for sent in tsents if sent]
+
 			train = tsents
 			#print train[100:]
 			#print(train)
