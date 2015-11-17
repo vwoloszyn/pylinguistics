@@ -23,30 +23,29 @@ def load_tagger(language):
 			print('loading portuguese.pickle')
 			tagger.load('portuguese_tags.pickle')
 
-			print('evaluating')
-			import nltk.corpus
-
-
-
-			tsents = nltk.corpus.mac_morpho.tagged_sents()[:500]
-			print ('len:%i' %len(tsents))
-
-			sentencesClean = [[(clear_string(w.encode('ascii','ignore')).lower(), t.upper()) for (w,t) in sent if w.encode('ascii','ignore').strip() != ""] for sent in tsents if sent]
-			#sentences = [[(w.lower(), t.upper()) for (w,t) in sent] for sent in tsents if sent]
-
 			
-			print(sentences)
-			print(sentencesClean)
-			evaluate=tagger.evaluate(sentences)
-			evaluateClean=tagger.evaluate(sentencesClean)
-
-			print('precision:%f' %evaluate)
-			print('precision with clean:%f' %evaluateClean)
-			#print(tagger.tag('hoje eu vou comer um sanduiche'.split()))
 		except:
 
 
-			# The tagset consists of the following 12 coarse tags:
+			print('evaluating')
+			import nltk.corpus
+
+			tsents = nltk.corpus.mac_morpho.tagged_sents()
+			print ('len:%i' %len(tsents))
+
+			#sentencesClean = [[(clear_string(w.encode('ascii','ignore')).lower(), t.upper()) for (w,t) in sent if w.encode('ascii','ignore').strip() != ""] for sent in tsents if sent]
+			sentences = [[(w.lower(), t.upper()) for (w,t) in sent] for sent in tsents if sent]
+			
+			#print(sentences)
+			#print(sentencesClean)
+			evaluate=tagger.evaluate(sentences)
+			#evaluateClean=tagger.evaluate(sentencesClean)
+
+			print('precision:%f' %evaluate)
+			#print('precision with clean:%f' %evaluateClean)
+			#print(tagger.tag('hoje eu vou comer um sanduiche'.split()))
+
+
 
 
 
@@ -91,7 +90,7 @@ def getTokens(pylinguistObj):
 			#Python understands the common character encoding used for Portuguese, ISO 8859-1 (ISO Latin 1).
 			#tokens = nltk.word_tokenize(clear_string(pylinguistObj.text.encode('utf-8','ignore').lower().decode('ascii','ignore'))
 			tokens = nltk.word_tokenize(pylinguistObj.text.lower())
-			print (tokens)
+			#print (tokens)
 			return tokens
 			#.decode('iso-8859-1')
 		else:
