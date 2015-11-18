@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 class SyllableSeparator(object):
     """This class defines the basic interface for syllable separators.
     """

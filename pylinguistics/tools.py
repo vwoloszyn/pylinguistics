@@ -106,6 +106,7 @@ def getTokens(pylinguistObj):
 			#tokens = nltk.word_tokenize(clear_string(pylinguistObj.text.encode('utf-8','ignore').lower().decode('ascii','ignore'))
 			tokens = nltk.word_tokenize(pylinguistObj.text.lower())
 			#print (tokens)
+			#sys.exit(0)
 			return tokens
 			#.decode('iso-8859-1')
 		else:

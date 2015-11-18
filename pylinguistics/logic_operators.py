@@ -4,111 +4,103 @@
 
 import tools
 
-LogicNegation = 0
-LogicIf = 0
-LogicOr = 0
-LogicAnd = 0
-LogicAll = 0
+
 
 
 def Negation(pylinguistObj):
     #Incidência de Negações. Consideramos como negações: não, nem, nenhum, nenhuma, nada, nunca e jamais.
     if (pylinguistObj.language == "pt-br"):
-    	dic = [tools.clear_string('não'),tools.clear_string('nem'),tools.clear_string('nenhum'),tools.clear_string('nenhuma'),tools.clear_string('nada'),\
-    	tools.clear_string('nunca'),tools.clear_string('jamais')]
+    	dic = ['não','nem','nenhum','nenhuma','nada','nunca','jamais']
     	count =0
     	for w in pylinguistObj.tokens:
-    		if tools.clear_string(w) in dic:
+    		w=w.encode('utf-8').lower()
+    		if w in dic:
     			count+=1
-    global LogicNegation
-    LogicNegation = count
-    return LogicNegation
+    #global LogicNegation
+    #LogicNegation = count
+    return count
 
 def If(pylinguistObj):
 	#Incidência do operador lógico SE em um texto (desconsidera quando o SE é um pronome).
 	if (pylinguistObj.language == "pt-br"):
-		dic=[tools.clear_string('se')]
+		dic=['se']
 		count =0
 		for w in pylinguistObj.tokens:
-			if tools.clear_string(w) in dic:
+			w=w.encode('utf-8').lower()
+			if w in dic:
 				count+=1
-	global LogicIf
-	LogicIf = count
-	return LogicIf
+	#global LogicIf
+	#LogicIf = count
+	return count
 
 def Or(pylinguistObj):
 	### Incidência do operador lógico OU: #Incidência do operador lógico SE em um texto (desconsidera quando o SE é um pronome).
 	if (pylinguistObj.language == "pt-br"):
-		dic = [tools.clear_string('ou')]
+		dic = ['ou']
 		count =0
 		for w in pylinguistObj.tokens:
-			if tools.clear_string(w) in dic:
+			w=w.encode('utf-8').lower()
+			if w in dic:
 				count+=1
-	global LogicOr
-	LogicOr = count
-	return LogicOr
+	#global LogicOr
+	#LogicOr = count
+	return count
 
 def And(pylinguistObj):
 	#Incidência do operador lógico SE em um texto (desconsidera quando o SE é um pronome)
 	if (pylinguistObj.language == "pt-br"):
-		dic = [tools.clear_string('e')]
+		dic = ['e']
 		count =0
 		for w in pylinguistObj.tokens:
-			if tools.clear_string(w) in dic:
+			w=w.encode('utf-8').lower()
+			if w in dic:
 				count+=1
-	global LogicAnd
-	LogicAnd = count
-	return LogicAnd
-
-def LogicNegationIncidence(pylinguistObj):
-	global LogicNegation
-	if (LogicNegation==0):
-		LogicNegation = Negation(pylinguistObj)
-	return LogicNegation / (float(len(pylinguistObj.postag))/1000)
-
-
-def LogicIfIncidence(pylinguistObj):
-	global LogicIf
-	if (LogicIf==0):
-		LogicIf = If(pylinguistObj)
-	return LogicIf / (float(len(pylinguistObj.postag))/1000)
-
-def LogicOrIncidence(pylinguistObj):
-	global LogicOr
-	if (LogicOr==0):
-		LogicOr = Or(pylinguistObj)
-	return LogicOr / (float(len(pylinguistObj.postag))/1000)
-
-def LogicAndIncidence(pylinguistObj):
-	global LogicAnd
-	if (LogicAnd==0):
-		LogicAnd = And(pylinguistObj)
-	return LogicAnd / (float(len(pylinguistObj.postag))/1000)
-
-
+	#global LogicAnd
+	#LogicAnd = count
+	return count
 
 def LogicOperators(pylinguistObj):
-	global LogicNegation
-	if (LogicNegation==0):
-		LogicNegation = Negation(pylinguistObj)
-	global LogicIf
-	if (LogicIf==0):
-		LogicIf = If(pylinguistObj)
-	global LogicOr
-	if (LogicOr==0):
-		LogicOr = Or(pylinguistObj)
-	global LogicAnd
-	if (LogicAnd==0):
-		LogicAnd = And(pylinguistObj)
 	
-	global LogicAll
+	LogicNegation = Negation(pylinguistObj)
+	
+	LogicIf = If(pylinguistObj)
+	
+	LogicOr = Or(pylinguistObj)
+	
+	LogicAnd = And(pylinguistObj)
+	
 	LogicAll = LogicNegation + LogicIf + LogicOr + LogicAnd
 	return 	LogicAll
 
 
+
+
+def LogicNegationIncidence(pylinguistObj):
+
+	LogicNegation = Negation(pylinguistObj)
+	return LogicNegation / (float(len(pylinguistObj.postag))/1000)
+
+
+def LogicIfIncidence(pylinguistObj):
+	
+	LogicIf = If(pylinguistObj)
+	return LogicIf / (float(len(pylinguistObj.postag))/1000)
+
+def LogicOrIncidence(pylinguistObj):
+	
+	LogicOr = Or(pylinguistObj)
+	return LogicOr / (float(len(pylinguistObj.postag))/1000)
+
+def LogicAndIncidence(pylinguistObj):
+	
+	LogicAnd = And(pylinguistObj)
+	return LogicAnd / (float(len(pylinguistObj.postag))/1000)
+
+
+
+
 def LogicOperatorsIncidence(pylinguistObj):
-	global LogicAll
-	if (LogicAll==0):
-		LogicAll = LogicOperators(pylinguistObj)
+	
+	LogicAll = LogicOperators(pylinguistObj)
 	return LogicAll / (float(len(pylinguistObj.postag))/1000)
 

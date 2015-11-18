@@ -9,6 +9,7 @@ import descriptive
 import wordInformation
 import disfluencies
 import logic_operators
+import connectives
 
 
 def text(text):
@@ -86,6 +87,8 @@ class pylinguistics:
 
 
     def getFeatures(self):
+
+
         features={}
 
         features['word_count'] = descriptive.word_count(self)
@@ -111,6 +114,13 @@ class pylinguistics:
         features['LogicAndIncidence'] = logic_operators.LogicAndIncidence(self)
         features['LogicOperatorsIncidence'] = logic_operators.LogicOperatorsIncidence(self)
 
+        features['ConnectiveIncidence'] = connectives.ConnectiveIncidence(self)
+        features['ConnectiveAdditiveIncidence'] = connectives.AdditiveIncidence(self)
+        features['ConnectiveLogicIncidence'] = connectives.LogicIncidence(self)
+        features['ConnectiveTemporalIncidence'] = connectives.TemporalIncidence(self)
+        features['ConnectiveCasualIncidence'] = connectives.CasualIncidence(self)
+
+        
 
 
 

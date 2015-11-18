@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 # cases.py - Auxiliary file for silva2011.py
 # Copyright (C) 2014  Alessandro Bokan
 #

@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 import nltk
 import tools
 
@@ -58,17 +61,20 @@ def syllable_count (pylinguistObj):
 		count=0
 		count_error=0
 		for w in pylinguistObj.tokens:
-			w_clean = tools.clear_string(w)
-			if len(w_clean)>1:
+			#w_clean = tools.clear_string(w)
+			w = tools.clear_string(w.encode('utf-8'))
+			if len(w)>1:
 				#result = 
 				#print ('separando palavra:%s' %w_clean)
 				try:
-					leng = len(syllable_separator.separate(str(w_clean)))
+					syllables = syllable_separator.separate(w)
+					leng = len(syllables)
 					count+=leng
+					#print ('word:%s syllables:%s %i ' %(w, syllables,leng))
 				except:
 					count_error+=1
-					#print ('ERROR ON WORD: %s' %w_clean)
-			#print ('word:%s syllables:%s %i ' %(w, syllable_separator.separate(w),leng))
+					#print ('ERROR ON WORD: %s' %w)
+			
 		pylinguistObj.syllable_count = count
 		return count
 
