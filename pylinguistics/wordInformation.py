@@ -221,4 +221,22 @@ def typeTokensRatio(pylinguistObj):
 	return float(ntypes)/float(ntokens)
 
 
+def contentTokensRatio(pylinguistObj):
 
+	dic_types={}
+	types=[]
+	ntypes=0
+	total=0
+	for tag in pylinguistObj.postag:
+		word = tag[0]
+		word_clas = tag[1]
+		if word_clas == "VERB" or word_clas == "NOUN" or word_clas == "ADJ" or word_clas == "ADV" :
+			total +=1
+			dic_types[word]=1
+
+	for w in dic_types:
+		types.append(w)
+
+	ntypes = len(types)
+	print('ntypes: %i, ntokens: %i' %(ntypes,total))
+	return float(ntypes)/float(total)

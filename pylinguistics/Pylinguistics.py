@@ -105,7 +105,9 @@ class pylinguistics:
         features['pronIncidence'] = wordInformation.pronIncidence(self)
         features['contentIncidence'] = wordInformation.contentIncidence(self)
         features['functionalIncidence'] = wordInformation.functionalIncidence(self)
-        features['LexicalDiveristy'] = wordInformation.typeTokensRatio(self)
+        features['LexicalDiversty'] = wordInformation.typeTokensRatio(self)
+        features['ContentDiversty'] = wordInformation.contentTokensRatio(self)
+
 
 
         features['LogicNegationIncidence'] = logic_operators.LogicNegationIncidence(self)
