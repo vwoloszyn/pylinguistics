@@ -22,7 +22,7 @@ import tools
 
 
 dic_aditive=["modo","entretanto","todavia","do","contudo","entanto","além","disso","demais","ademais","outrossim","ainda","mais","cima","por",\
-"outro","lado","também","e","nem","não","só","mas","não","só","como","apenas","bem","como","com","ou","e/ou"]
+"outro","lado","também","e","nem","não","só","mas","não","só","como","apenas","bem","como","com","ou","e/ou","porém"]
 
 dic_logic=["e","ou","se","então","somente"]
 
@@ -32,10 +32,21 @@ dic_temp=["tempo","então","enfim","logo","depois","principio", "no", "momento",
 "simultanemanete","interim","nesse","meio","hiato","enquanto","quando","antes","depois","logo","sempre","assim","desde","todas"\
 "cada","apenas","já","mal","bem","até"]
 
-
 dic_casual=["consequentemente","que","dado","de","por","consequencia","conseguinte","resultado","isso","por","causa","em","virtude"\
 "asim","fato","efeito","tão","porque","porquê","porquanto","pois","já","uma","vez","visto","portanto"\
 "logo","tal","sorte","tal","forma","haja","vista"]
+
+
+dic_positive=["consequentemente","que","dado","de","por","consequencia","conseguinte","resultado","isso","por","causa","em","virtude"\
+"asim","fato","efeito","tão","porque","porquê","porquanto","pois","uma","vez","visto","portanto"\
+"logo","tal","sorte","tal","forma","haja","vista", "tempo","então","enfim","logo","depois","principio", "no", "momento", "pouco", "antes", "depois"\
+"anteriormente","posteriormente","em","seguida","final","fim","finalmente","agora","atualmente","hoje","fequentemente"\
+"constantemente","às","vezes","eventualmente","vezes","ocasionalmente","sempre","mesmo","tempo"\
+"simultanemanete","interim","nesse","meio","hiato","enquanto","quando","antes","depois","logo","sempre","assim","desde","todas"\
+"cada","já","bem","até", "e","ou","se","então","somente", "modo","do","além","disso","demais","ademais","outrossim","ainda","mais","cima","por",\
+"outro","lado","também","só","como","bem","como","com","ou","e/ou"]
+
+dic_negative=["já", "raramente","raro","não", "apenas", "mal", "entretanto","todavia","contudo","entanto", "nem","mas","apenas","porém"]
 
 
 
@@ -48,6 +59,7 @@ def Connectives(pylinguistObj):
 				#print w
 				ConnectiveAll+=1
 	return ConnectiveAll
+
 
 
 def Additive(pylinguistObj):
@@ -93,7 +105,26 @@ def Casual(pylinguistObj):
 				ConnectiveCasual+=1
 	return ConnectiveCasual
 
+def Positive(pylinguistObj):
+	ConnectivePositive = 0
+	if (pylinguistObj.language == "pt-br"):
+		for (w,t) in pylinguistObj.postag:
+			w=w.encode('utf-8').lower()
+			if (t == "CONJ" and w in dic_positive):
+				#print ('Positive: %s' %w)
+				ConnectivePositive+=1
+	return ConnectivePositive
 
+
+def Negative(pylinguistObj):
+	ConnectiveNegative = 0
+	if (pylinguistObj.language == "pt-br"):
+		for (w,t) in pylinguistObj.postag:
+			w=w.encode('utf-8').lower()
+			if (t == "CONJ" and w in dic_negative):
+				#print ('Negative: %s' %w)
+				ConnectiveNegative+=1
+	return ConnectiveNegative
 
 
 
@@ -103,25 +134,30 @@ def Casual(pylinguistObj):
 
 def ConnectiveIncidence(pylinguistObj):
 	ConnectiveAll = Connectives(pylinguistObj)
-	return ConnectiveAll / (float(len(pylinguistObj.postag))/1000)
-
+	return ConnectiveAll / (float(pylinguistObj.word_count)/1000)
 
 def AdditiveIncidence(pylinguistObj):
 	ConnectiveAdditive = Additive(pylinguistObj)
-	return ConnectiveAdditive / (float(len(pylinguistObj.postag))/1000)
+	return ConnectiveAdditive / (float(pylinguistObj.word_count)/1000)
 
 def LogicIncidence(pylinguistObj):
 	ConnectiveLogic = Logic(pylinguistObj)
-	return ConnectiveLogic / (float(len(pylinguistObj.postag))/1000)
+	return ConnectiveLogic / (float(pylinguistObj.word_count)/1000)
 
 def TemporalIncidence(pylinguistObj):
 	ConnectiveTemporal = Temporal(pylinguistObj)
-	return ConnectiveTemporal / (float(len(pylinguistObj.postag))/1000)
+	return ConnectiveTemporal / (float(pylinguistObj.word_count)/1000)
 
 
 def CasualIncidence(pylinguistObj):
 	ConnectiveCasual = Casual(pylinguistObj)
-	return ConnectiveCasual / (float(len(pylinguistObj.postag))/1000)
+	return ConnectiveCasual / (float(pylinguistObj.word_count)/1000)
 
+def PositiveIncidence(pylinguistObj):
+	ConnectivePositive = Positive(pylinguistObj)
+	return ConnectivePositive / (float(pylinguistObj.word_count)/1000)
 
+def NegativeIncidence(pylinguistObj):
+	ConnectiveNegative = Negative(pylinguistObj)
+	return ConnectiveNegative / (float(pylinguistObj.word_count)/1000)
 

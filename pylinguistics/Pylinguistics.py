@@ -125,8 +125,8 @@ class pylinguistics:
 
 
         #features['contentDensity'] = self.contentDensity()
-        features['redability'] = redability.calc_flesch_kincaid_grade(self)
-        
+        features['redability'] = redability.calc_redability(self)
+
         return features        
 
 

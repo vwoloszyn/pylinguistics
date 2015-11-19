@@ -50,7 +50,7 @@ def adjectiveIncidence(pylinguistObj):
 
 	adjectiveIncidence=0
 	try:
-		adjectiveIncidence = nAdjective / (float(len(pylinguistObj.postag))/1000)
+		adjectiveIncidence = nAdjective / (float(pylinguistObj.word_count)/1000)
 	except:
 		adjectiveIncidence = 0
 
@@ -71,7 +71,7 @@ def nounIncidence(pylinguistObj):
 	#print('adjective %i' %nAdjective)
 	noumIncidence=0
 	try:
-		noumIncidence = nNoun / (float(len(pylinguistObj.postag))/1000)
+		noumIncidence = nNoun / (float(pylinguistObj.word_count)/1000)
 	except:
 		noumIncidence = 0
 
@@ -94,7 +94,7 @@ def verbIncidence(pylinguistObj):
 	verbIncidence=0
 
 	try:
-		verbIncidence = nVerb / (float(len(pylinguistObj.postag))/1000)
+		verbIncidence = nVerb / (float(pylinguistObj.word_count)/1000)
 	except:
 		verbIncidence = 0
 	
@@ -116,7 +116,7 @@ def advIncidence(pylinguistObj):
 	advIncidence=0
 
 	try:
-		advIncidence = nADV / (float(len(pylinguistObj.postag))/1000)
+		advIncidence = nADV / (float(pylinguistObj.word_count)/1000)
 	except:
 		advIncidence = 0
 	
@@ -160,12 +160,36 @@ def contentIncidence(pylinguistObj):
 	incidence=0
 
 	try:
-		incidence = count / (float(len(pylinguistObj.postag))/1000)
+		incidence = count / (float(pylinguistObj.word_count)/1000)
 	except:
 		incidence = 0
 	
 	return incidence
 
+"""
+def contentOverlap(pylinguistObj):
+	if (pylinguistObj.postag == []):
+		pylinguistObj.postag= tools.getPosTag(pylinguistObj)
+
+	count=0
+	index=0
+	for index, tag in enumerate(pylinguistObj.postag):
+		word = tag[0]
+		word_clas = tag[1]
+		#if word_clas == "VB" or word_clas == "VBD" or word_clas == "VBG" or word_clas == "VBN" or word_clas == "VBP" or word_clas == "VBZ" :
+		if word_clas == "VERB" or word_clas == "NOUN" or word_clas == "ADJ" or word_clas == "ADV" :
+			count +=1
+	#print('adjective %i' %nAdjective)
+
+	incidence=0
+
+	try:
+		incidence = count / (float(pylinguistObj.word_count))/1000)
+	except:
+		incidence = 0
+	
+	return incidence
+"""
 
 def functionalIncidence(pylinguistObj):
 	if (pylinguistObj.postag == []):
@@ -182,7 +206,7 @@ def functionalIncidence(pylinguistObj):
 	incidence=0
 
 	try:
-		incidence = count / (float(len(pylinguistObj.postag))/1000)
+		incidence = count / (float(pylinguistObj.word_count)/1000)
 	except:
 		incidence = 0
 	

@@ -30,8 +30,17 @@ def avg_syllables_per_word (pylinguistObj):
 def word_count (pylinguistObj):
 	if (pylinguistObj.tokens == []):
 		pylinguistObj.tokens = tools.getTokens(pylinguistObj.text)
-	pylinguistObj.word_count = len(pylinguistObj.tokens)
-	return len(pylinguistObj.tokens)
+	count = len(pylinguistObj.tokens)
+
+	for tag in pylinguistObj.postag:
+		word = tag[0]
+		word_clas = tag[1]
+		#ponctuations are not words
+		if word_clas == "." :
+			count -=1
+
+	pylinguistObj.word_count = count
+	return count
 
 def sentence_count (pylinguistObj):
 	x=0

@@ -78,23 +78,23 @@ def LogicOperators(pylinguistObj):
 def LogicNegationIncidence(pylinguistObj):
 
 	LogicNegation = Negation(pylinguistObj)
-	return LogicNegation / (float(len(pylinguistObj.postag))/1000)
+	return LogicNegation / (float(pylinguistObj.word_count)/1000)
 
 
 def LogicIfIncidence(pylinguistObj):
 	
 	LogicIf = If(pylinguistObj)
-	return LogicIf / (float(len(pylinguistObj.postag))/1000)
+	return LogicIf / (float(pylinguistObj.word_count)/1000)
 
 def LogicOrIncidence(pylinguistObj):
 	
 	LogicOr = Or(pylinguistObj)
-	return LogicOr / (float(len(pylinguistObj.postag))/1000)
+	return LogicOr / (float(pylinguistObj.word_count)/1000)
 
 def LogicAndIncidence(pylinguistObj):
 	
 	LogicAnd = And(pylinguistObj)
-	return LogicAnd / (float(len(pylinguistObj.postag))/1000)
+	return LogicAnd / (float(pylinguistObj.word_count)/1000)
 
 
 
@@ -102,5 +102,5 @@ def LogicAndIncidence(pylinguistObj):
 def LogicOperatorsIncidence(pylinguistObj):
 	
 	LogicAll = LogicOperators(pylinguistObj)
-	return LogicAll / (float(len(pylinguistObj.postag))/1000)
+	return LogicAll / (float(pylinguistObj.word_count)/1000)
 

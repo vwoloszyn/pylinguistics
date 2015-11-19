@@ -10,6 +10,12 @@ from nltk.corpus import wordnet as wn
 def redability(pylinguistObj): 
     return min(calc_flesch_kincaid_grade(pylinguistObj), calc_coleman_liau_index(pylinguistObj))
 
+def calc_redability(pylinguistObj):
+    if pylinguistObj.language == "pt-br":
+        return calc_flesch_score_portuguese(pylinguistObj)
+    else:
+        return calc_flesch_kincaid_grade(pylinguistObj)
+
 def calc_coleman_liau_index (pylinguistObj):
     ###VERIFICAR
     texto = pylinguistObj.text
@@ -39,6 +45,19 @@ def calc_flesch_kincaid_grade (pylinguistObj):
         print('ERROR :'+ValueError)
     return x
 
+def calc_flesch_score_portuguese (pylinguistObj):
+    ###VERIFICAR
+    texto = pylinguistObj.text
+    x=0
+    try:
+        ASL = pylinguistObj.avg_word_per_sentence
+        ASW = pylinguistObj.avg_syllables_per_word
+        ReadingScore = float(206.835 - (84.6 * ASW) + (1.015 * ASL) + 42)
+        x= round(ReadingScore, 1)
+    except ValueError:
+        x=0
+        print('ERROR :'+ValueError)
+    return x
 
 def calcAmbiquity(pylinguistObj):
     if (pylinguistObj.postag == []):
