@@ -6,8 +6,8 @@ import nltk.tag
 from nltk.tag.perceptron import PerceptronTagger
 from nltk.tokenize import sent_tokenize
 import re
-
-
+import os,sys
+import shlex
 
 tagger = None
 
@@ -18,6 +18,14 @@ def load_tagger(language):
 		tagger = PerceptronTagger()
 	elif (language=="pt-br"):
 		print('tagger pt-br')
+
+
+		import nlpnet
+		#path = os.path.realpath('./pylinguistics/resources/pos-pt/').replace(" ","\ ")+'/'
+		#print (path)
+		tagger = nlpnet.POSTagger('./pylinguistics/resources/pos-pt/', language='pt')
+
+		"""
 		tagger = PerceptronTagger(load=False)
 		try:
 			print('Loading portuguese.pickle')
@@ -57,33 +65,10 @@ def load_tagger(language):
 
 			print('Model accuracy:%f' %evaluate)
 
-			#sys.exit(0)
+
+		"""
 
 
-
-
-			# import nltk.corpus
-			# import ast
-			# #from nltk.corpus import floresta
-			# import nltk
-			# nltk.download('mac_morpho')
-			# #nltk.download('floresta')
-			
-			# print('training portuguese.pickle')
-			# #train = [[('today','NN'),('is','VBZ'),('good','JJ'),('day','NN')],[('yes','NNS'),('it','PRP'),('beautiful','JJ')]]
-			# #train=[('Um', '>N+art'), ('revivalismo', 'H+n'), ('refrescante', 'N<+adj'), ('O', '>N+art'), ('7_e_Meio', 'H+prop'), ('\xc3\xa9', 'P+v-fin'), ('um', '>N+art'), ('ex-libris', 'H+n'), ('de', 'H+prp'), ('a', '>N+art')]
-			# #train = nltk.corpus.mac_morpho.tagged_words()
-			# #nltk.corpus.mac_morpho.tagged_words()
-			# #.decode('utf-8')
-			# tsents = nltk.corpus.mac_morpho.tagged_sents()
-			# tsents = [[(clear_string(w.encode('ascii','ignore')).lower(), t.upper()) for (w,t) in sent if w.encode('ascii','ignore').strip() != ""] for sent in tsents if sent]
-			# 			# sentences = [[(w.lower(), t.upper()) for (w,t) in sent if w.strip() != ""] for sent in tsents if sent]
-
-			# train = tsents
-			# #print train[100:]
-			# #print(train)
-			# tagger.train(train, 'portuguese_tags.pickle')
-			# tagger.load('portuguese_tags.pickle')
 
 
 def getTypes(pylinguistObj):
@@ -133,7 +118,17 @@ def getPosTag(pylinguistObj):
 	#print(pylinguistObj.tokens)
 	#tags=nltk.tag._pos_tag(pylinguistObj.tokens, None, tagger)
 	#print(pylinguistObj.tokens)
-	tags=tagger.tag(pylinguistObj.tokens)
+	if (pylinguistObj.language == "pt-br"):
+		sent =tagger.tag(pylinguistObj.text)
+		#print(sent)
+		tags=[]
+		tokens=[]
+		idx=0
+		for t in sent[0]:
+			tags.append((str(t[0]),str(t[1])))
+			tokens.append(str(t[0]))
+			idx+=1
+		pylinguistObj.tokens=tokens
 
 			# VERB - verbs (all tenses and modes)
 			# NOUN - nouns (common and proper)

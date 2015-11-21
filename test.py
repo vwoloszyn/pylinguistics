@@ -15,6 +15,7 @@ text = "Houve um tempo em que o hábito de manter cadernos de anotações era al
 
 text= "Ia bem em matemática, porem reprovou em física."
 
+text = "O rato roeu a roupa do rei de Roma."
 objpl=pl.text(text.decode('utf-8'))
 objpl.setLanguage("pt-br");
 
