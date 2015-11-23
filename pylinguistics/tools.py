@@ -21,9 +21,9 @@ def load_tagger(language):
 
 
 		import nlpnet
-		#path = os.path.realpath('./pylinguistics/resources/pos-pt/').replace(" ","\ ")+'/'
-		#print (path)
-		tagger = nlpnet.POSTagger('./pylinguistics/resources/pos-pt/', language='pt')
+		path = os.path.dirname(__file__) + '/resources/pos-pt/'
+		#print ('ciretori: %s' %path)
+		tagger = nlpnet.POSTagger(path, language='pt')
 
 		"""
 		tagger = PerceptronTagger(load=False)
@@ -119,15 +119,16 @@ def getPosTag(pylinguistObj):
 	#tags=nltk.tag._pos_tag(pylinguistObj.tokens, None, tagger)
 	#print(pylinguistObj.tokens)
 	if (pylinguistObj.language == "pt-br"):
-		sent =tagger.tag(pylinguistObj.text)
+		sents =tagger.tag(pylinguistObj.text.lower())
 		#print(sent)
 		tags=[]
 		tokens=[]
 		idx=0
-		for t in sent[0]:
-			tags.append((str(t[0]),str(t[1])))
-			tokens.append(str(t[0]))
-			idx+=1
+		for sent in sents:
+			for t in sent:
+				tags.append((t[0],str(t[1])))
+				tokens.append(t[0])
+				idx+=1
 		pylinguistObj.tokens=tokens
 
 			# VERB - verbs (all tenses and modes)
