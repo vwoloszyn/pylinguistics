@@ -1,7 +1,7 @@
 Pylinguistics
 ~~~~~~~~~~~~~
 
-``Pylinguistics`` is compotational linguistics tool inspired on http://cohmetrix.com/ that allows an analysis of cohesion, coherence of a text. In reading and comprehension process, the textual cohesion is an important characteristics that help the reader to mentally connect tue ideas expressed in the text (Graesser, McNamara, & Louwerse, 2003). 
+``Pylinguistics`` is compotational linguistics tool inspired on http://cohmetrix.com/ that allows an analysis of cohesion, coherence of a text. In reading and comprehension process, the textual cohesion is an important characteristics that help the reader to mentally connect the ideas expressed in the text (Graesser, McNamara, & Louwerse, 2003). 
 
 ``Pylinguistics`` is a biligual (Portuguese and English) and open source project that allow compute some readability metrics of the text.
 
@@ -54,9 +54,9 @@ Dependencies
 ``Pylinguistics`` also requires extra resources: NLTK_ and nlpnet_. Additionally, NLTK_ needs some extra downloads. After installing it, call
 
 .. code-block:: python
-	
+
 	>>> import nltk
-    >>> nltk.download()
+	>>> nltk.download()
 
 .. _NLTK: http://www.nltk.org
 .. _nlpnet: https://github.com/erickrf/nlpnet/
@@ -67,7 +67,8 @@ Try
 You can also test ``pylinguistics`` by yourself without any instalation: http://app.mybinder.org/1746087056/notebooks/pylinguistics_test.ipynb
 
 
-Install (not working yet - We'll do it ASAP)
+Install 
 ~~~~~~~~~~~~~
 
+(not working yet - We'll do it ASAP)
 pip install git+git://github.com/vwoloszyn/pylinguistics.git
