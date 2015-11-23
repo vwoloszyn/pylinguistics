@@ -49,7 +49,12 @@ Basicic Usage
 Dependencies
 ~~~~~~~~~~~~~
 
-``Pylinguistics`` requires NLTK_ and nlpnet_. Additionally, it needs to download some data from NLTK. After installing it, call
+``Pylinguistics`` also requires extra resources: NLTK_ and nlpnet_. Additionally, NLTK_ needs some extra downloads. After installing it, call
+
+.. code-block:: python
+	
+	>>> import nltk
+    >>> nltk.download()
 
 .. _NLTK: http://www.nltk.org
 .. _nlpnet: https://github.com/erickrf/nlpnet/
@@ -57,10 +62,10 @@ Dependencies
 Try
 ~~~~~~~~~~~~~
 
-You can test ``pylinguistics``by yourself without instalation: http://app.mybinder.org/1746087056/notebooks/pylinguistics_test.ipynb
+You can also test ``pylinguistics`` by yourself without any instalation: http://app.mybinder.org/1746087056/notebooks/pylinguistics_test.ipynb
 
 
-Install (not working yet)
+Install (not working yet - We'll do it ASAP)
 ~~~~~~~~~~~~~
 
 pip install git+git://github.com/vwoloszyn/pylinguistics.git
