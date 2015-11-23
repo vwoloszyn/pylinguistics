@@ -1,7 +1,11 @@
-# Pylinguistics
+Pylinguistics
+~~~~~~~~~~~~~
+
 It is a Computational Linguistics tool inpired on http://cohmetrix.com/ to compute cohesion and coherence metrics for english and portuguse. 
 
-# Metrics
+Metrics
+~~~~~~~~~~~~~
+
 The project is still in developing process, but until now, we already have some functional metrics.
 
 * Word count
@@ -30,7 +34,9 @@ The project is still in developing process, but until now, we already have some 
 * Connective Casual Incidence
 
 
-# Basicic Usage
+Basicic Usage
+~~~~~~~~~~~~~
+
 .. code-block:: python
 
     >>> import Pylinguistics as pl
@@ -40,15 +46,21 @@ The project is still in developing process, but until now, we already have some 
     {'ConnectiveAdditiveIncidence': 125.0, 'redability': 66.6, 'word_count': 8, 'ConnectiveLogicIncidence': 0.0, 'syllable_count': 17, 'avg_word_per_sentence': 8.0, 'LogicIfIncidence': 0.0, 'LogicAndIncidence': 0.0, 'ContentDiversty': 1.0, 'pronIncidence': 0.0, 'LogicOperatorsIncidence': 0.0, 'verbIncidence': 250.0, 'functionalIncidence': 375.0, 'nounIncidence': 250.0, 'LogicOrIncidence': 0.0, 'adjectiveIncidence': 0.0, 'LogicNegationIncidence': 0.0, 'contentIncidence': 625.0, 'ConnectiveIncidence': 125.0, 'avg_syllables_per_word': 2.125, 'ConnectiveTemporalIncidence': 0.0, 'sentence_count': 1, 'ConnectiveCasualIncidence': 0.0, 'advIncidence': 125.0, 'LexicalDiversty': 0.9}
 
 
-# Dependencies
+Dependencies
+~~~~~~~~~~~~~
+
 ``Pylinguistics`` requires NLTK_ and nlpnet_. Additionally, it needs to download some data from NLTK. After installing it, call
 
 .. _NLTK: http://www.nltk.org
 .. _nlpnet: https://github.com/erickrf/nlpnet/
 
-# Try
+Try
+~~~~~~~~~~~~~
+
 You can test ``pylinguistics``by yourself without instalation: http://app.mybinder.org/1746087056/notebooks/pylinguistics_test.ipynb
 
 
-# Install (not working yet)
+Install (not working yet)
+~~~~~~~~~~~~~
+
 pip install git+git://github.com/vwoloszyn/pylinguistics.git
