@@ -146,8 +146,8 @@ def getPosTag(pylinguistObj):
 
 	#retaging
 	#if (pylinguistObj.language=="pt-br"):
-	dic ={"PREP|+":"ADP","ADJ":"ADJ","ADV-KS":"ADV","ART":"DET","ADV":"ADV","ADV-KS-REL":"ADV","KC":"CONJ","KS":"CONJ","IN":"X","N":"NOUN",\
-		"NPROP":"NOUN","NUM":"NUM","PCP":"PRT","PDEN":"X","PREP":"ADP","PROADJ":"PRON","PRO-KS":"PRON","PROPESS":"PRON","PRO-KS-REL":"PRON",\
+	dic ={"PREP|+":"ADP","ADJ":"ADJ","ADV":"ADV","ADV-KS":"ADV-KS","ART":"DET","ADV-KS-REL":"ADV","KC":"CONJ","KS":"CONJ","IN":"IN","N":"NOUN",\
+		"NPROP":"NOUN","NUM":"NUM","PCP":"PRT","PDEN":"X","PREP":"ADP","PROADJ":"PRON","PRO-KS":"PRO-KS","PROPESS":"PRON","PRO-KS-REL":"PRO-KS-REL",\
 		"PROSUB":"PRON","V":"VERB","VAUX":"VERB","CUR":"X","|EST":"X","|AP":"X","|DAD":"X","PREP+ART":"ADP","PREP+PROPESS":"ADP","PREP+ADV":"ADP",\
 		"PREP+PROADJ":"ADP","PREP+PRO-KS-REL":"ADP","PREP+PROSUB":"ADP","PU":".","-":".",",":".","N|DAT":"NUM","PREP|+":"ADP"}
 
@@ -155,8 +155,17 @@ def getPosTag(pylinguistObj):
 	for c in tags:
 		newtag.append((c[0], dic.get(str(c[1]),str(c[1]))))
 
-	#print(newtag)
-	return newtag
+	fixedtag = []
+	aux = "."
+
+	for c in newtag:
+		aux = c[1]
+		word = c[0].encode('utf-8')
+		if word == "“" or word == "’" or word == "‘" or word == "”":
+			aux = "."
+		fixedtag.append((c[0], aux))
+
+	return fixedtag
 	#except:
 	#	print('error on getPosTag')
 	#	return []

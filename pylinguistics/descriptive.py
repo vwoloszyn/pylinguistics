@@ -38,12 +38,17 @@ def word_count (pylinguistObj):
 		#ponctuations are not words
 		if word_clas == "." :
 			count -=1
+			#print word
 
 	pylinguistObj.word_count = count
 	return count
 
 def sentence_count (pylinguistObj):
 	x=0
+	#adicionando ponto final de linha
+	
+	pylinguistObj.text = pylinguistObj.text.replace(' \n', '.')
+	#print pylinguistObj.text
 	try:
 		if (pylinguistObj.language == "pt-br"):
 			nltk.sent_tokenizer=nltk.data.load('tokenizers/punkt/portuguese.pickle')

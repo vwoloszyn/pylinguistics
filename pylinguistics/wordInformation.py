@@ -110,7 +110,7 @@ def advIncidence(pylinguistObj):
 		word = tag[0]
 		word_clas = tag[1]
 		#if word_clas == "VB" or word_clas == "VBD" or word_clas == "VBG" or word_clas == "VBN" or word_clas == "VBP" or word_clas == "VBZ" :
-		if word_clas == "ADV":
+		if word_clas == "ADV" or word_clas == "ADV-KS":
 			nADV +=1
 	#print('adjective %i' %nAdjective)
 	advIncidence=0
@@ -132,7 +132,7 @@ def pronIncidence(pylinguistObj):
 		word = tag[0]
 		word_clas = tag[1]
 		#if word_clas == "VB" or word_clas == "VBD" or word_clas == "VBG" or word_clas == "VBN" or word_clas == "VBP" or word_clas == "VBZ" :
-		if word_clas == "PRON":
+		if word_clas == "PRON" or word_clas == "PRO-KS" or word_clas == "PRO-KS-REL":
 			nPRON +=1
 	#print('adjective %i' %nAdjective)
 	pronIncidence=0
@@ -200,7 +200,7 @@ def functionalIncidence(pylinguistObj):
 		word = tag[0]
 		word_clas = tag[1]
 		#if word_clas == "VB" or word_clas == "VBD" or word_clas == "VBG" or word_clas == "VBN" or word_clas == "VBP" or word_clas == "VBZ" :
-		if word_clas == "DET" or word_clas == "ADP" or word_clas == "PRON" or word_clas == "CONJ" :
+		if word_clas == "DET" or word_clas == "ADP" or word_clas == "PRON" or word_clas == "CONJ" or word_clas == "IN" :
 			count +=1
 	#print('adjective %i' %nAdjective)
 	incidence=0
@@ -214,11 +214,31 @@ def functionalIncidence(pylinguistObj):
 
 def typeTokensRatio(pylinguistObj):
 
+	""" old function
 	tools.getTypes(pylinguistObj)
 	ntypes = len(pylinguistObj.types)
 	ntokens = len(pylinguistObj.tokens)
-	#print('ntypes: %i, ntokens: %i' %(ntypes,ntokens))
+	print('ntypes: %i, ntokens: %i' %(ntypes,ntokens))
 	return float(ntypes)/float(ntokens)
+	"""
+
+	dic_types={}
+	types=[]
+	ntypes=0
+	total=0
+	for tag in pylinguistObj.postag:
+		word = tag[0]
+		word_clas = tag[1]
+		if word_clas != "." :
+			total +=1
+			dic_types[word]=1
+
+	for w in dic_types:
+		types.append(w)
+
+	ntypes = len(types)
+	#print('ntypes: %i, ntokens: %i' %(ntypes,total))
+	return float(ntypes)/float(total)
 
 
 def contentTokensRatio(pylinguistObj):

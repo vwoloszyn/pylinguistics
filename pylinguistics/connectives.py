@@ -55,7 +55,7 @@ def Connectives(pylinguistObj):
 	#print ('conjuncoes: ')
 	if (pylinguistObj.language == "pt-br"):
 		for (w,t) in pylinguistObj.postag:
-			if (t == "CONJ" ):
+			if (t == "CONJ" or t == "PRO-KS-REL" or t =="PRO-KS-REL" or t =="ADV-KS" ):
 				#print w
 				ConnectiveAll+=1
 	return ConnectiveAll

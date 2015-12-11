@@ -7,12 +7,10 @@ from nltk.corpus import wordnet as wn
 #### REDABILITY ###################
 ###################################
 
-def redability(pylinguistObj): 
-    return min(calc_flesch_kincaid_grade(pylinguistObj), calc_coleman_liau_index(pylinguistObj))
 
 def calc_redability(pylinguistObj):
     if pylinguistObj.language == "pt-br":
-        return calc_flesch_score_portuguese(pylinguistObj)
+        return flesch_port(pylinguistObj)
     else:
         return calc_flesch_kincaid_grade(pylinguistObj)
 
@@ -31,6 +29,10 @@ def calc_coleman_liau_index (pylinguistObj):
         x=0
     return x
 
+def flesch_port(pylinguistObj):
+    ILF = 248.835 - (1.015 * float(pylinguistObj.avg_word_per_sentence)) - (84.6 * float(pylinguistObj.avg_syllables_per_word))
+ 
+    return ILF
 
 def calc_flesch_kincaid_grade (pylinguistObj):
     #texto = pylinguistObj.text

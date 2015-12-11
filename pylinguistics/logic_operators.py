@@ -15,6 +15,7 @@ def Negation(pylinguistObj):
     	for w in pylinguistObj.tokens:
     		w=w.encode('utf-8').lower()
     		if w in dic:
+    			#print(w)
     			count+=1
     #global LogicNegation
     #LogicNegation = count
@@ -28,6 +29,7 @@ def If(pylinguistObj):
 		for w in pylinguistObj.tokens:
 			w=w.encode('utf-8').lower()
 			if w in dic:
+				#print(w)
 				count+=1
 	#global LogicIf
 	#LogicIf = count
@@ -41,6 +43,7 @@ def Or(pylinguistObj):
 		for w in pylinguistObj.tokens:
 			w=w.encode('utf-8').lower()
 			if w in dic:
+				#print(w)
 				count+=1
 	#global LogicOr
 	#LogicOr = count
@@ -54,9 +57,11 @@ def And(pylinguistObj):
 		for w in pylinguistObj.tokens:
 			w=w.encode('utf-8').lower()
 			if w in dic:
+				#print(w)
 				count+=1
 	#global LogicAnd
 	#LogicAnd = count
+	print(count)
 	return count
 
 def LogicOperators(pylinguistObj):
