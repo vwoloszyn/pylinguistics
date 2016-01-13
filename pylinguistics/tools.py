@@ -24,7 +24,6 @@ def load_tagger(language):
 		path = os.path.dirname(__file__) + '/resources/pos-pt/'
 		#print ('ciretori: %s' %path)
 		tagger = nlpnet.POSTagger(path, language='pt')
-
 		"""
 		tagger = PerceptronTagger(load=False)
 		try:
@@ -95,7 +94,9 @@ def getTokens(pylinguistObj):
 			return tokens
 			#.decode('iso-8859-1')
 		else:
-			return nltk.word_tokenize(pylinguistObj.text)
+
+			tokens = nltk.word_tokenize(pylinguistObj.text)
+			return tokens
 	#except:
 	#	return [] 
 
@@ -118,6 +119,10 @@ def getPosTag(pylinguistObj):
 	#print(pylinguistObj.tokens)
 	#tags=nltk.tag._pos_tag(pylinguistObj.tokens, None, tagger)
 	#print(pylinguistObj.tokens)
+
+
+
+
 	if (pylinguistObj.language == "pt-br"):
 		sents =tagger.tag(pylinguistObj.text.lower())
 		#print(sent)
@@ -144,26 +149,42 @@ def getPosTag(pylinguistObj):
 			# X - other: foreign words, typos, abbreviations
 			# . - punctuation
 
-	#retaging
-	#if (pylinguistObj.language=="pt-br"):
-	dic ={"PREP|+":"ADP","ADJ":"ADJ","ADV":"ADV","ADV-KS":"ADV-KS","ART":"DET","ADV-KS-REL":"ADV","KC":"CONJ","KS":"CONJ","IN":"IN","N":"NOUN",\
-		"NPROP":"NOUN","NUM":"NUM","PCP":"PRT","PDEN":"X","PREP":"ADP","PROADJ":"PRON","PRO-KS":"PRO-KS","PROPESS":"PRON","PRO-KS-REL":"PRO-KS-REL",\
-		"PROSUB":"PRON","V":"VERB","VAUX":"VERB","CUR":"X","|EST":"X","|AP":"X","|DAD":"X","PREP+ART":"ADP","PREP+PROPESS":"ADP","PREP+ADV":"ADP",\
-		"PREP+PROADJ":"ADP","PREP+PRO-KS-REL":"ADP","PREP+PROSUB":"ADP","PU":".","-":".",",":".","N|DAT":"NUM","PREP|+":"ADP"}
+		#retaging
+		#if (pylinguistObj.language=="pt-br"):
+		dic ={"PREP|+":"ADP","ADJ":"ADJ","ADV":"ADV","ADV-KS":"ADV-KS","ART":"DET","ADV-KS-REL":"ADV","KC":"CONJ","KS":"CONJ","IN":"IN","N":"NOUN",\
+			"NPROP":"NOUN","NUM":"NUM","PCP":"PRT","PDEN":"X","PREP":"ADP","PROADJ":"PRON","PRO-KS":"PRO-KS","PROPESS":"PRON","PRO-KS-REL":"PRO-KS-REL",\
+			"PROSUB":"PRON","V":"VERB","VAUX":"VERB","CUR":"X","|EST":"X","|AP":"X","|DAD":"X","PREP+ART":"ADP","PREP+PROPESS":"ADP","PREP+ADV":"ADP",\
+			"PREP+PROADJ":"ADP","PREP+PRO-KS-REL":"ADP","PREP+PROSUB":"ADP","PU":".","-":".",",":".","N|DAT":"NUM","PREP|+":"ADP"}
 
-	newtag = []
-	for c in tags:
-		newtag.append((c[0], dic.get(str(c[1]),str(c[1]))))
+		newtag = []
+		for c in tags:
+			newtag.append((c[0], dic.get(str(c[1]),str(c[1]))))
 
-	fixedtag = []
-	aux = "."
+		fixedtag = []
+		aux = "."
 
-	for c in newtag:
-		aux = c[1]
-		word = c[0].encode('utf-8')
-		if word == "“" or word == "’" or word == "‘" or word == "”":
-			aux = "."
-		fixedtag.append((c[0], aux))
+		for c in newtag:
+			aux = c[1]
+			word = c[0].encode('utf-8')
+			if word == "“" or word == "’" or word == "‘" or word == "”":
+				aux = "."
+			fixedtag.append((c[0], aux))
+	else:
+		tags=[]
+		tags = tagger.tag(pylinguistObj.tokens)
+
+
+		dic = {"CC":"CONJ","CD":"NUM","DT":"DET","EX":"PRT","FW":"X","IN":"ADP","JJ":"ADJ","JJR":"ADJ","JJS":"ADJ","LS":".","MD":"VERB","NN":"NOUN","NNS":"NOUN",\
+			"NNP":"NOUN","NNPS":"NOUN","PDT":"DET","POS":"ADP","PRP":"PRON","PRP$":"PRON","RB":"ADV","RBR":"ADV","RBS":"ADV","RP":"PRT","SYM":".","TO":"ADP",\
+			"UH":"X","VB":"VERB","VBD":"VERB","VBG":"VERB","VBN":"VERB","VBP":"VERB","VBZ":"VERB","WDT":"PRON","WP":"PRON","WP$":"PRON","WRB":"ADV"}
+
+		newtag = []
+		for c in tags:
+			newtag.append((c[0], dic.get(str(c[1]),str(c[1]))))
+		fixedtag = newtag
+
+	#print fixedtag
+
 
 	return fixedtag
 	#except:

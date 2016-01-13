@@ -66,6 +66,24 @@ def sentence_count (pylinguistObj):
 	x=0
 	return x
 
+def syllable_counter_english(text):
+    count = 0
+    vowels = 'aeiouy'
+    text = text.lower().strip(".:;?!)(")
+    if text[0] in vowels:
+        count += 1
+    for index in range(1, len(text)):
+        if text[index] in vowels and text[index-1] not in vowels:
+            count += 1
+    if text.endswith('e'):
+        count -= 1
+    if text.endswith('le'):
+        count += 1
+    if count == 0:
+        count += 1
+    count = count - (0.1*count)
+    return (round(count))
+
 def syllable_count (pylinguistObj):
 	x=0
 	if (pylinguistObj.language == "pt-br"):
@@ -91,7 +109,25 @@ def syllable_count (pylinguistObj):
 			
 		pylinguistObj.syllable_count = count
 		return count
-
+	else:
+		count=0
+		count_error=0
+		for w in pylinguistObj.tokens:
+			#w_clean = tools.clear_string(w)
+			w = tools.clear_string(w.encode('utf-8'))
+			if len(w)>1:
+				#result = 
+				#print ('separando palavra:%s' %w_clean)
+				try:
+					leng = syllable_counter_english(w)
+					count+=leng
+					#print ('word:%s syllables:%i ' %(w,leng))
+				except:
+					count_error+=1
+					#print ('ERROR ON WORD: %s' %w)
+			
+		pylinguistObj.syllable_count = count
+		return count
 	# try:
 
 	# 	count = 0

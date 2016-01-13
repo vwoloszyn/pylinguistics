@@ -49,6 +49,25 @@ dic_positive=["consequentemente","que","dado","de","por","consequencia","consegu
 dic_negative=["já", "raramente","raro","não", "apenas", "mal", "entretanto","todavia","contudo","entanto", "nem","mas","apenas","porém"]
 
 
+dic_aditive_en=["and","both","plus","neither","nor","also","additionally","besides","equally","furthermore","moreover","similarly"]
+
+dic_logic_en=["and","or","if","then","only"]
+
+dic_temp_en=["after","as","before","once","since","until","when","whenever","while","afterwards","finally","first","second","later","meanwhile",\
+"next","previously","subsequently","then","during"]
+
+dic_casual_en=["as","because","since","so","accordingly","consequently","hence","therefore","thus","caused","though","however", "moreover",\
+"nevertheless","otherwise","still","then","yet"]
+
+
+
+
+
+
+
+
+
+
 
 def Connectives(pylinguistObj):
 	ConnectiveAll = 0
@@ -58,8 +77,12 @@ def Connectives(pylinguistObj):
 			if (t == "CONJ" or t == "PRO-KS-REL" or t =="PRO-KS-REL" or t =="ADV-KS" ):
 				#print w
 				ConnectiveAll+=1
+	else:
+		for (w,t) in pylinguistObj.postag:
+			if (t == "CONJ" or t == "PRO-KS-REL" or t =="PRO-KS-REL" or t =="ADV-KS" ):
+				#print w
+				ConnectiveAll+=1
 	return ConnectiveAll
-
 
 
 def Additive(pylinguistObj):
@@ -70,6 +93,13 @@ def Additive(pylinguistObj):
 			if (t == "CONJ" and w in dic_aditive):
 				#print ('aditive: %s' %w)
 				ConnectiveAdditive+=1
+	else:
+		for (w,t) in pylinguistObj.postag:
+			w=w.encode('utf-8').lower()
+			if (w in dic_aditive_en):
+				#print ('aditive: %s' %w)
+				ConnectiveAdditive+=1
+
 	return ConnectiveAdditive
 
 
@@ -79,6 +109,12 @@ def Logic(pylinguistObj):
 		for (w,t) in pylinguistObj.postag:
 			w=w.encode('utf-8').lower()
 			if (t == "CONJ" and w in dic_logic):
+				#print ('logic: %s' %w)
+				ConnectiveLogic+=1
+	else:
+		for (w,t) in pylinguistObj.postag:
+			w=w.encode('utf-8').lower()
+			if (w in dic_logic_en):
 				#print ('logic: %s' %w)
 				ConnectiveLogic+=1
 	return ConnectiveLogic
@@ -92,6 +128,12 @@ def Temporal(pylinguistObj):
 			if (t == "CONJ" and w in dic_temp):
 				#print ('Temporal: %s' %w)
 				ConnectiveTemporal+=1
+	else:
+		for (w,t) in pylinguistObj.postag:
+			w=w.encode('utf-8').lower()
+			if ( w in dic_temp_en):
+				#print ('Temporal: %s' %w)
+				ConnectiveTemporal+=1
 	return ConnectiveTemporal
 
 
@@ -102,6 +144,11 @@ def Casual(pylinguistObj):
 			w=w.encode('utf-8').lower()
 			if (t == "CONJ" and w in dic_casual):
 				#print ('Casual: %s' %w)
+				ConnectiveCasual+=1
+	else:
+		for (w,t) in pylinguistObj.postag:
+			w=w.encode('utf-8').lower()
+			if (w in dic_casual_en):
 				ConnectiveCasual+=1
 	return ConnectiveCasual
 

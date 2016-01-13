@@ -20,7 +20,7 @@ def text(text):
 class pylinguistics:
 
     def __init__(self):
-        self.language="pt-br"
+        self.language="en"
         self.tokens=[]
         self.types=[]
         self.postag=[]

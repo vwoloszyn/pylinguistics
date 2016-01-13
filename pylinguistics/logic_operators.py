@@ -17,6 +17,15 @@ def Negation(pylinguistObj):
     		if w in dic:
     			#print(w)
     			count+=1
+    else:
+    	#dic = ['no not don't doesn't didn't won't wouldn't can't couldn't isn't, aren't, wasn't, weren't haven't, hasn't, hadn't shouldn't cannot']
+    	dic = ['no','not','none','nothing','never']
+    	count =0
+    	for w in pylinguistObj.tokens:
+    		w=w.encode('utf-8').lower()
+    		if w in dic:
+    			#print(w)
+    			count+=1
     #global LogicNegation
     #LogicNegation = count
     return count
@@ -31,14 +40,30 @@ def If(pylinguistObj):
 			if w in dic:
 				#print(w)
 				count+=1
+	else:
+		dic=['if']
+		count =0
+		for w in pylinguistObj.tokens:
+			w=w.encode('utf-8').lower()
+			if w in dic:
+				#print(w)
+				count+=1
 	#global LogicIf
 	#LogicIf = count
 	return count
 
 def Or(pylinguistObj):
-	### Incidência do operador lógico OU: #Incidência do operador lógico SE em um texto (desconsidera quando o SE é um pronome).
+	### Incidência do operador lógico OU: #Incidência do operador lógico SE em um texto.
 	if (pylinguistObj.language == "pt-br"):
 		dic = ['ou']
+		count =0
+		for w in pylinguistObj.tokens:
+			w=w.encode('utf-8').lower()
+			if w in dic:
+				#print(w)
+				count+=1
+	else:
+		dic = ['or']
 		count =0
 		for w in pylinguistObj.tokens:
 			w=w.encode('utf-8').lower()
@@ -50,7 +75,7 @@ def Or(pylinguistObj):
 	return count
 
 def And(pylinguistObj):
-	#Incidência do operador lógico SE em um texto (desconsidera quando o SE é um pronome)
+	#Incidência do operador lógico E em um texto.
 	if (pylinguistObj.language == "pt-br"):
 		dic = ['e']
 		count =0
@@ -59,9 +84,17 @@ def And(pylinguistObj):
 			if w in dic:
 				#print(w)
 				count+=1
+	else:
+		dic = ['and']
+		count =0
+		for w in pylinguistObj.tokens:
+			w=w.encode('utf-8').lower()
+			if w in dic:
+				#print(w)
+				count+=1
 	#global LogicAnd
 	#LogicAnd = count
-	print(count)
+	#print(count)
 	return count
 
 def LogicOperators(pylinguistObj):
