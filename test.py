@@ -18,26 +18,25 @@ import pandas as pd
 #text= "Ia bem em matemática, porém reprovou em física."
 #text =  "Todos esses que aí estão atravancando meu caminho, eles passarão... Eu passarinho!"
 #text = "O rato roeu a roupa do rei de Roma."
-#text = "Esse processo mostra que estamos diante de um novo modelo de interação universidade-empresa para geração de tecnologia e contratações de nível qualificado. Sabemos que no mundo a maior parte das pesquisas é feita nas empresas, mas não dá para a empresa surgir do nada. Mesmo em países como os Estados Unidos é preciso começar na universidade com ideias inovadoras, diz Pereira. Para os contratados, a parceria se transformou em uma grande oportunidade de exercício profissional. Sempre quis trabalhar no ramo empresarial e em desenvolvimento sustentável, diz a bióloga Maria Grassi, 25 anos."
+text = "Esse processo mostra que estamos diante de um novo modelo de interação universidade-empresa para geração de tecnologia e contratações de nível qualificado. Sabemos que no mundo a maior parte das pesquisas é feita nas empresas, mas não dá para a empresa surgir do nada. Mesmo em países como os Estados Unidos é preciso começar na universidade com ideias inovadoras, diz Pereira. Para os contratados, a parceria se transformou em uma grande oportunidade de exercício profissional. Sempre quis trabalhar no ramo empresarial e em desenvolvimento sustentável, diz a bióloga Maria Grassi, 25 anos."
+#text = "Os amigos de João esperaram com ele."
 #objpl=pl.text(fapesp.loc[267]['texto'].decode('utf-8'))
 
-file = open('english/2286.txt', 'r')
+#file = open('english/2286.txt', 'r')
 
 
-text = file.read()
+#text = file.read()
 
-print text
+#print text
 
-objpl = pl.text(text)
+objpl = pl.text(text.decode('utf-8'))
 
 
-objpl.setLanguage("en");
+objpl.setLanguage("pt");
 
 
 print('Features: %s' %objpl.getFeatures())
 #print('POS_TAGS: %s' %objpl.tokens)
-print('POS_TAGS: %s' %objpl.postag)
+#print('POS_TAGS: %s' %objpl.postag)
 #print(len(objpl.postag))
 
-
- 

@@ -144,6 +144,75 @@ def pronIncidence(pylinguistObj):
 	
 	return pronIncidence
 
+"""def adpIncidence(pylinguistObj):
+	if (pylinguistObj.postag == []):
+		pylinguistObj.postag= tools.getPosTag(pylinguistObj)
+
+	nADP=0
+	for tag in pylinguistObj.postag:
+		word = tag[0]
+		word_clas = tag[1]
+		#if word_clas == "VB" or word_clas == "VBD" or word_clas == "VBG" or word_clas == "VBN" or word_clas == "VBP" or word_clas == "VBZ" :
+		if word_clas == "ADP":
+			nADP +=1
+	#print('adjective %i' %nAdjective)
+	adpIncidence=0
+
+	try:
+		adpIncidence = nADP / (float(len(pylinguistObj.postag))/1000)
+	except:
+		adpIncidence = 0
+	
+	return adpIncidence
+"""
+
+def adpPronRatio(pylinguistObj):
+	#Counting pronouns
+	if (pylinguistObj.postag == []):
+		pylinguistObj.postag= tools.getPosTag(pylinguistObj)
+
+	nPRON=0
+	for tag in pylinguistObj.postag:
+		word = tag[0]
+		word_clas = tag[1]
+		#if word_clas == "VB" or word_clas == "VBD" or word_clas == "VBG" or word_clas == "VBN" or word_clas == "VBP" or word_clas == "VBZ" :
+		if word_clas == "PRON" or word_clas == "PRO-KS" or word_clas == "PRO-KS-REL":
+			nPRON +=1
+	#print('adjective %i' %nAdjective)
+	pronIncidence=0
+
+	try:
+		pronIncidence = nPRON / (float(len(pylinguistObj.postag))/1000)
+	except:
+		pronIncidence = 0
+	
+	 
+	#counting adpositions
+	if (pylinguistObj.postag == []):
+		pylinguistObj.postag= tools.getPosTag(pylinguistObj)
+
+	nADP=0
+	for tag in pylinguistObj.postag:
+		word = tag[0]
+		word_clas = tag[1]
+		#if word_clas == "VB" or word_clas == "VBD" or word_clas == "VBG" or word_clas == "VBN" or word_clas == "VBP" or word_clas == "VBZ" :
+		if word_clas == "ADP":
+			nADP +=1
+	#print('adjective %i' %nAdjective)
+	adpIncidence=0
+
+	try:
+		adpIncidence = nADP / (float(len(pylinguistObj.postag))/1000)
+	except:
+		adpIncidence = 0
+	
+	try:
+		ratio = pronIncidence / float(adpIncidence)
+	except:
+		ratio = 0
+
+	return ratio
+
 
 def contentIncidence(pylinguistObj):
 	if (pylinguistObj.postag == []):

@@ -47,9 +47,11 @@ class pylinguistics:
 
        
         #Descriptive counts       
+        self.tokenized_sentences = descriptive.tokenized_sentences(self)
         self.word_count = descriptive.word_count(self)
         self.sentence_count = descriptive.sentence_count(self)
         self.avg_word_per_sentence = descriptive.avg_word_per_sentence(self)
+        #self.word_length = descriptive.word_length(self)                       #Doesn't work, for some reason
         #self.syllable_count = descriptive.syllable_count(self)    
         #self.avg_syllables_per_word = descriptive.avg_syllables_per_word(self)
 
@@ -68,6 +70,7 @@ class pylinguistics:
         #print ('  Syllable count=%i' % self.syllable_count)
         print ('  Avg word per sentence=%f'%self.avg_word_per_sentence)
         #print ('  Avg syllable per word=%f' % self.avg_syllables_per_word)
+
 
         print ('2. Word Information')
         print ('  Adjective incidence=%f' % self.adjectiveIncidence())
@@ -97,6 +100,23 @@ class pylinguistics:
         features['syllable_count'] = descriptive.syllable_count(self)
         features['avg_syllables_per_word'] = descriptive.avg_syllables_per_word(self)
 
+        features['sentence_sized_30'] = descriptive.sentence_sized_30(self)
+        features['mean_sentence_length'] = descriptive.mean_sentence_length(self)
+        features['median_sentence_length'] = descriptive.median_sentence_length(self)
+        features['percentile_25_sentence_length'] = descriptive.percentile_25_sentence_length(self)
+        features['percentile_50_sentence_length'] = descriptive.percentile_50_sentence_length(self)
+        features['percentile_75_sentence_length'] = descriptive.percentile_75_sentence_length(self)
+        features['percentile_90_sentence_length'] = descriptive.percentile_90_sentence_length(self)
+        features['mean_word_length'] = descriptive.mean_word_length(self)
+        features['median_word_length'] = descriptive.median_sentence_length(self)
+        features['percentile_25_word_length'] = descriptive.percentile_25_word_length(self)
+        features['percentile_50_word_length'] = descriptive.percentile_50_word_length(self)
+        features['percentile_75_word_length'] = descriptive.percentile_75_word_length(self)
+        features['percentile_90_word_length'] = descriptive.percentile_90_word_length(self)
+
+        #features['word_length'] = descriptive.word_length(self)
+        #features['sentence_length'] = descriptive.sentence_length(self)
+
 
         features['adjectiveIncidence'] = wordInformation.adjectiveIncidence(self)
         features['nounIncidence'] = wordInformation.nounIncidence(self)
@@ -108,6 +128,7 @@ class pylinguistics:
         features['LexicalDiversty'] = wordInformation.typeTokensRatio(self)
         features['ContentDiversty'] = wordInformation.contentTokensRatio(self)
 
+        features['adpPronRatio'] = wordInformation.adpPronRatio(self) 
 
 
         features['LogicNegationIncidence'] = logic_operators.LogicNegationIncidence(self)

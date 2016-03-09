@@ -3,6 +3,7 @@
 
 import nltk
 import tools
+import numpy as np
 
 
 #################################
@@ -43,12 +44,8 @@ def word_count (pylinguistObj):
 	pylinguistObj.word_count = count
 	return count
 
-def sentence_count (pylinguistObj):
-	x=0
-	#adicionando ponto final de linha
-	
-	pylinguistObj.text = pylinguistObj.text.replace(' \n', '.')
-	#print pylinguistObj.text
+def tokenized_sentences (pylinguistObj):
+
 	try:
 		if (pylinguistObj.language == "pt-br"):
 			nltk.sent_tokenizer=nltk.data.load('tokenizers/punkt/portuguese.pickle')
@@ -56,15 +53,99 @@ def sentence_count (pylinguistObj):
 		else:
 			tokenized_sentences = nltk.sent_tokenize(pylinguistObj.text)
 
-		x= len(tokenized_sentences)
 	except ValueError:
-		#print('error:' +ValueError)
-		x=0
+		print('error:' +ValueError)
+
+	return tokenized_sentences
+
+
+
+def sentence_count (pylinguistObj):
+
+	x= len(pylinguistObj.tokenized_sentences)
+	
 	pylinguistObj.sentence_count = x
+
 	return x
 
-	x=0
-	return x
+
+def sentence_sized_30 (pylinguistObj):
+
+	temp = pylinguistObj
+	#pylinguistObj.tokens = tools.getTokens(value)
+	count= 0
+	for key, value in enumerate(pylinguistObj.tokenized_sentences):
+		temp.text = value
+		#print value
+		tokens=tools.getTokens(temp)
+		if len(tokens) > 30:
+			count = count+1
+		total = (key + 1) 
+
+	percent = (count*100)/total
+	return percent
+
+
+def sentence_length (pylinguistObj):
+
+	temp = pylinguistObj
+	#pylinguistObj.tokens = tools.getTokens(value)
+
+	array = []
+	for key, value in enumerate(pylinguistObj.tokenized_sentences):
+		temp.text = value
+		tokens=tools.getTokens(temp)
+		array.append(len(tokens)) 
+
+	return array
+
+def mean_sentence_length (pylinguistObj):
+	array = []
+	array = sentence_length(pylinguistObj)
+	
+	a = np.array(array)
+
+	return np.mean(a)
+
+def median_sentence_length (pylinguistObj):
+	array = []
+	array = sentence_length(pylinguistObj)
+	
+	a = np.array(array)
+
+	return np.median(a)
+
+def percentile_25_sentence_length (pylinguistObj):
+	array = []
+	array = sentence_length(pylinguistObj)
+	
+	a = np.array(array)
+
+	return np.percentile(a, 25)
+
+def percentile_50_sentence_length (pylinguistObj):
+	array = []
+	array = sentence_length(pylinguistObj)
+	
+	a = np.array(array)
+
+	return np.percentile(a, 50)
+
+def percentile_75_sentence_length (pylinguistObj):
+	array = []
+	array = sentence_length(pylinguistObj)
+	
+	a = np.array(array)
+
+	return np.percentile(a, 75)
+
+def percentile_90_sentence_length (pylinguistObj):
+	array = []
+	array = sentence_length(pylinguistObj)
+	
+	a = np.array(array)
+
+	return np.percentile(a, 90)
 
 def syllable_counter_english(text):
     count = 0
@@ -83,6 +164,84 @@ def syllable_counter_english(text):
         count += 1
     count = count - (0.1*count)
     return (round(count))
+
+def word_length (pylinguistObj):
+	if (pylinguistObj.language == "pt"):
+		#from source.syllable import silva2011
+		#import source.syllable.silva2011
+		from resources.syllable.silva2011 import syllable_separator
+
+		array = []
+		count_error=0
+		for w in pylinguistObj.tokens:
+			count=0
+
+			w = tools.clear_string(w.encode('utf-8'))
+			if len(w)>1:
+				#print ('separando palavra:%s' %w_clean)
+				try:
+					syllables = syllable_separator.separate(w)
+					leng = len(syllables)
+					count+=leng
+					#print ('word:%s syllables:%s %i ' %(w, syllables,leng))
+				except:
+					count_error+=1
+					#print ('ERROR ON WORD: %s' %w)
+			array.append(count)
+			
+		#pylinguistObj.word_length = array 			#Not working
+		return array
+
+		#Syllable counting needs fixing
+		#print array
+	
+def mean_word_length (pylinguistObj):
+	array = []
+	array = word_length(pylinguistObj)
+	
+	a = np.array(array)
+
+	return np.mean(a)
+
+def median_word_length (pylinguistObj):
+	array = []
+	array = word_length(pylinguistObj)
+	
+	a = np.array(array)
+
+	return np.median(a)
+
+def percentile_25_word_length (pylinguistObj):
+	array = []
+	array = word_length(pylinguistObj)
+	
+	a = np.array(array)
+
+	return np.percentile(a, 25)
+
+def percentile_50_word_length (pylinguistObj):
+	array = []
+	array = word_length(pylinguistObj)
+	
+	a = np.array(array)
+
+	return np.percentile(a, 50)
+
+def percentile_75_word_length (pylinguistObj):
+	array = []
+	array = word_length(pylinguistObj)
+	
+	a = np.array(array)
+
+	return np.percentile(a, 75)
+
+def percentile_90_word_length (pylinguistObj):
+	array = []
+	array = word_length(pylinguistObj)
+	
+	a = np.array(array)
+
+	return np.percentile(a, 90)
 
 def syllable_count (pylinguistObj):
 	x=0
