@@ -5,6 +5,8 @@ Pylinguistics
 
 ``Pylinguistics`` is a biligual (Portuguese and English) and open source project that allow compute some readability metrics of the text.
 
+[![Build Status](https://travis-ci.org/vwoloszyn/pylinguistics.png?branch=master)](https://travis-ci.org/vwoloszyn/pylinguistics)
+
 Metrics
 ~~~~~~~~~~~~~
 
