@@ -226,7 +226,7 @@ def mean_word_length (pylinguistObj):
 	array = word_length(pylinguistObj)
 	
 	a = np.array(array)
-
+	
 	return np.mean(a)
 
 def median_word_length (pylinguistObj):
