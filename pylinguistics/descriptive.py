@@ -271,14 +271,14 @@ def percentile_90_word_length (pylinguistObj):
 
 def syllable_count (pylinguistObj):
 	x=0
-	if (pylinguistObj.language == "pt-br"):
+	if (pylinguistObj.language == "pt"):
 		#from source.syllable import silva2011
 		#import source.syllable.silva2011
 		from resources.syllable.silva2011 import syllable_separator
 		count=0
 		count_error=0
 		for w in pylinguistObj.tokens:
-			#w_clean = tools.clear_string(w)
+			w_clean = tools.clear_string(w)
 			w = tools.clear_string(w.encode('utf-8'))
 			if len(w)>1:
 				#result = 
@@ -295,6 +295,7 @@ def syllable_count (pylinguistObj):
 		pylinguistObj.syllable_count = count
 		return count
 	else:
+		#print "ELSE"
 		count=0
 		count_error=0
 		for w in pylinguistObj.tokens:
