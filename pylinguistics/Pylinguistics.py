@@ -20,7 +20,8 @@ def text(text):
 class pylinguistics:
 
     def __init__(self):
-        self.language="en"
+        self.language="pt-br"
+        #text(self, text)
         self.tokens=[]
         self.types=[]
         self.postag=[]
@@ -63,29 +64,6 @@ class pylinguistics:
 
 
 
-    def summary(self):
-        print ('1. Descriptive')
-        print ('  Word count=%i' %self.word_count)
-        print ('  Sentence count=%i' %self.sentence_count)
-        #print ('  Syllable count=%i' % self.syllable_count)
-        print ('  Avg word per sentence=%f'%self.avg_word_per_sentence)
-        #print ('  Avg syllable per word=%f' % self.avg_syllables_per_word)
-
-
-        print ('2. Word Information')
-        print ('  Adjective incidence=%f' % self.adjectiveIncidence())
-        print ('  Noun incidence=%f' % self.nounIncidence())
-        print ('  Verb incidence=%f' % self.verbIncidence())
-
-        print ('3. Syntactic Pattern Density')
-        print ('  Content density=%f' % self.contentDensity())
-
-        print ('4. Redability')
-        print ('  min(flesch_kincaid, coleman_liau)= %f' % self.redability())
-        print ('  Ambiquity=%f' % self.calcAmbiquity())
-
-        #print (self.postag)
-
 
 
 
@@ -98,7 +76,8 @@ class pylinguistics:
         features['sentence_count'] = descriptive.sentence_count(self)
         features['avg_word_per_sentence'] = descriptive.avg_word_per_sentence(self)
         features['syllable_count'] = descriptive.syllable_count(self)
-        features['avg_syllables_per_word'] = descriptive.avg_syllables_per_word(self)
+        if self.word_count != 0:
+            features['avg_syllables_per_word'] = descriptive.avg_syllables_per_word(self)
 
         features['sentence_sized_30'] = descriptive.sentence_sized_30(self)
         features['mean_sentence_length'] = descriptive.mean_sentence_length(self)
@@ -107,12 +86,15 @@ class pylinguistics:
         features['percentile_50_sentence_length'] = descriptive.percentile_50_sentence_length(self)
         features['percentile_75_sentence_length'] = descriptive.percentile_75_sentence_length(self)
         features['percentile_90_sentence_length'] = descriptive.percentile_90_sentence_length(self)
-        features['mean_word_length'] = descriptive.mean_word_length(self)
-        features['median_word_length'] = descriptive.median_sentence_length(self)
-        features['percentile_25_word_length'] = descriptive.percentile_25_word_length(self)
-        features['percentile_50_word_length'] = descriptive.percentile_50_word_length(self)
-        features['percentile_75_word_length'] = descriptive.percentile_75_word_length(self)
-        features['percentile_90_word_length'] = descriptive.percentile_90_word_length(self)
+        if self.word_count != 0:
+            features['mean_word_length'] = descriptive.mean_word_length(self)
+            features['median_word_length'] = descriptive.median_sentence_length(self)
+            features['percentile_25_word_length'] = descriptive.percentile_25_word_length(self)
+            features['percentile_50_word_length'] = descriptive.percentile_50_word_length(self)
+            features['percentile_75_word_length'] = descriptive.percentile_75_word_length(self)
+            features['percentile_90_word_length'] = descriptive.percentile_90_word_length(self)
+            #features['orthographic_neighborhood'] = descriptive.orthographic_neighborhood(self)
+            
 
         #features['word_length'] = descriptive.word_length(self)
         #features['sentence_length'] = descriptive.sentence_length(self)
@@ -130,89 +112,23 @@ class pylinguistics:
 
         features['adpPronRatio'] = wordInformation.adpPronRatio(self) 
 
+        if self.word_count != 0:
+            features['LogicNegationIncidence'] = logic_operators.LogicNegationIncidence(self)
+            features['LogicIfIncidence'] = logic_operators.LogicIfIncidence(self)
+            features['LogicOrIncidence'] = logic_operators.LogicOrIncidence(self)
+            features['LogicAndIncidence'] = logic_operators.LogicAndIncidence(self)
+            features['LogicOperatorsIncidence'] = logic_operators.LogicOperatorsIncidence(self)
 
-        features['LogicNegationIncidence'] = logic_operators.LogicNegationIncidence(self)
-        features['LogicIfIncidence'] = logic_operators.LogicIfIncidence(self)
-        features['LogicOrIncidence'] = logic_operators.LogicOrIncidence(self)
-        features['LogicAndIncidence'] = logic_operators.LogicAndIncidence(self)
-        features['LogicOperatorsIncidence'] = logic_operators.LogicOperatorsIncidence(self)
+            features['ConnectiveIncidence'] = connectives.ConnectiveIncidence(self)
+            features['ConnectiveAdditiveIncidence'] = connectives.AdditiveIncidence(self)
+            features['ConnectiveLogicIncidence'] = connectives.LogicIncidence(self)
+            features['ConnectiveTemporalIncidence'] = connectives.TemporalIncidence(self)
+            features['ConnectiveCasualIncidence'] = connectives.CasualIncidence(self)
 
-        features['ConnectiveIncidence'] = connectives.ConnectiveIncidence(self)
-        features['ConnectiveAdditiveIncidence'] = connectives.AdditiveIncidence(self)
-        features['ConnectiveLogicIncidence'] = connectives.LogicIncidence(self)
-        features['ConnectiveTemporalIncidence'] = connectives.TemporalIncidence(self)
-        features['ConnectiveCasualIncidence'] = connectives.CasualIncidence(self)
-
-        
-
-
-
-        #features['contentDensity'] = self.contentDensity()
-        features['redability'] = redability.calc_redability(self)
+            #features['contentDensity'] = self.contentDensity()
+            features['redability'] = redability.calc_redability(self)
 
         return features        
-
-
-
-    ###METRICS
-
-
-
-
-
-    ####################################
-    ### Syntactic Pattern Density ######
-    ####################################
-
-    def contentDensity(self):
-        return disfluencies.contentDensity(self)
-
-
-    #Negation density, incidence
-    #Gerund density, incidence
-    #Infinitive density, incidence
-
-
-
-
-    ####################################
-    ### Connectives ####################
-    ####################################
-
-    #All connectives incidence
-    #Causal connectives incidence
-    #Logical connectives incidence
-    #Adversative and contrastive connectives incidence
-    #Temporal connectives incidence
-    #Additive connectives incidence
-    #Positive connectives incidence
-    #Negative connectives incidence
-
-
-    ####################################
-    ### Referential Cohesion ###########
-    ####################################
-
-    #Noun overlap, adjacent sentences,
-    #Argument overlap, adjacent sentences,
-    #Noun overlap, all sentences
-    #Argument overlap, all sentences
-    #Content word overlap, adjacent sentences,
-    #Content word overlap, all sentences,
-
-
-    ####################################
-    ### Redability  ####################
-    ####################################
-
-    def redability(self):
-        return redability.redability(self)
-
-    def calcAmbiquity(self):
-        return redability.calcAmbiquity(self)
-    
-    #correctness
-
 
 
 

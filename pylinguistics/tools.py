@@ -111,6 +111,7 @@ def getPosTag(pylinguistObj):
 	if tagger is None:
 		load_tagger(pylinguistObj.language)
 
+	print pylinguistObj.language
 	#print('tokens')
 	#print(getTokens('hoje eu vou comer um sanduiche'))
 	#print(tagger.tag(getTokens('hoje eu vou comer um sanduiche')))
@@ -122,8 +123,7 @@ def getPosTag(pylinguistObj):
 
 
 
-
-	if (pylinguistObj.language == "pt-br"):
+	if (pylinguistObj.language == "pt-br" or pylinguistObj.language == "pt"):
 		sents =tagger.tag(pylinguistObj.text.lower())
 		#print(sent)
 		tags=[]
@@ -135,7 +135,6 @@ def getPosTag(pylinguistObj):
 				tokens.append(t[0])
 				idx+=1
 		pylinguistObj.tokens=tokens
-
 			# VERB - verbs (all tenses and modes)
 			# NOUN - nouns (common and proper)
 			# PRON - pronouns
@@ -169,6 +168,8 @@ def getPosTag(pylinguistObj):
 			if word == "“" or word == "’" or word == "‘" or word == "”":
 				aux = "."
 			fixedtag.append((c[0], aux))
+
+
 	else:
 		tags=[]
 		tags = tagger.tag(pylinguistObj.tokens)
@@ -182,7 +183,6 @@ def getPosTag(pylinguistObj):
 		for c in tags:
 			newtag.append((c[0], dic.get(str(c[1]),str(c[1]))))
 		fixedtag = newtag
-
 	#print fixedtag
 
 

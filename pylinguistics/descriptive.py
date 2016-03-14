@@ -36,12 +36,37 @@ def word_count (pylinguistObj):
 	for tag in pylinguistObj.postag:
 		word = tag[0]
 		word_clas = tag[1]
-		#ponctuations are not words
+		#punctuations are not words
 		if word_clas == "." :
 			count -=1
 			#print word
 
 	pylinguistObj.word_count = count
+	return count
+
+def orthographic_neighborhood (pylinguistObj):
+	if (pylinguistObj.tokens == []):
+		pylinguistObj.tokens = tools.getTokens(pylinguistObj.text)
+	
+
+	array = []
+	for tag in pylinguistObj.postag:
+		word = tag[0]
+		word_clas = tag[1]
+		#punctuations are not words
+		if word_clas == "." :
+			array
+		else:
+			array.append(word)
+
+	count = 0
+	for index in range(len(array)):
+		for x in range(1,20):
+			if((index + x) < len(array)):
+				if(array[index] == array[index+x]):
+					count = count + 1
+	
+	print count
 	return count
 
 def tokenized_sentences (pylinguistObj):
@@ -97,6 +122,7 @@ def sentence_length (pylinguistObj):
 		tokens=tools.getTokens(temp)
 		array.append(len(tokens)) 
 
+	#returns an int array containing the size of all sentences
 	return array
 
 def mean_sentence_length (pylinguistObj):

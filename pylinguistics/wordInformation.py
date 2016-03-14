@@ -307,7 +307,11 @@ def typeTokensRatio(pylinguistObj):
 
 	ntypes = len(types)
 	#print('ntypes: %i, ntokens: %i' %(ntypes,total))
-	return float(ntypes)/float(total)
+	try:
+		result = float(ntypes)/float(total)
+	except:
+		result = 0
+	return result
 
 
 def contentTokensRatio(pylinguistObj):
@@ -328,4 +332,8 @@ def contentTokensRatio(pylinguistObj):
 
 	ntypes = len(types)
 	#print('ntypes: %i, ntokens: %i' %(ntypes,total))
-	return float(ntypes)/float(total)
+	try:
+		result = float(ntypes)/float(total)
+	except:
+		result = 0
+	return result

@@ -19,8 +19,8 @@ import pandas as pd
 #text =  "Todos esses que aí estão atravancando meu caminho, eles passarão... Eu passarinho!"
 #text = "O rato roeu a roupa do rei de Roma."
 text = "Esse processo mostra que estamos diante de um novo modelo de interação universidade-empresa para geração de tecnologia e contratações de nível qualificado. Sabemos que no mundo a maior parte das pesquisas é feita nas empresas, mas não dá para a empresa surgir do nada. Mesmo em países como os Estados Unidos é preciso começar na universidade com ideias inovadoras, diz Pereira. Para os contratados, a parceria se transformou em uma grande oportunidade de exercício profissional. Sempre quis trabalhar no ramo empresarial e em desenvolvimento sustentável, diz a bióloga Maria Grassi, 25 anos."
-#text = "Os amigos de João esperaram com ele."
-#objpl=pl.text(fapesp.loc[267]['texto'].decode('utf-8'))
+#text = "..."
+
 
 #file = open('english/2286.txt', 'r')
 
@@ -29,8 +29,19 @@ text = "Esse processo mostra que estamos diante de um novo modelo de interação
 
 #print text
 
-objpl = pl.text(text.decode('utf-8'))
+#objpl = Pylinguistics('pt',text.decode('utf-8'))
 
+
+
+
+
+
+
+
+
+
+
+objpl = pl.text(text.decode('utf-8'))
 
 objpl.setLanguage("pt");
 
