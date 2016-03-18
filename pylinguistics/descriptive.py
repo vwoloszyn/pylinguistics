@@ -217,7 +217,27 @@ def word_length (pylinguistObj):
 			
 		#pylinguistObj.word_length = array 			#Not working
 		return array
-
+	else:
+		#print "ELSE"
+		array = []
+		count_error=0
+		for w in pylinguistObj.tokens:
+			count=0
+			#w_clean = tools.clear_string(w)
+			w = tools.clear_string(w.encode('utf-8'))
+			if len(w)>1:
+				#result = 
+				#print ('separando palavra:%s' %w_clean)
+				try:
+					leng = syllable_counter_english(w)
+					count+=leng
+					#print ('word:%s syllables:%i ' %(w,leng))
+				except:
+					count_error+=1
+					#print ('ERROR ON WORD: %s' %w)
+			array.append(count)
+			
+		return array
 		#Syllable counting needs fixing
 		#print array
 	

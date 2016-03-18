@@ -12,9 +12,10 @@ import logic_operators
 import connectives
 
 
-def text(text):
+def text(text,lang='pt-br'):
     #print(text)
     pl = pylinguistics()
+    pl.language = lang
     return pl.text(text)
 
 class pylinguistics:
