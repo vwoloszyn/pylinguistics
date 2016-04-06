@@ -9,7 +9,7 @@ from nltk.corpus import wordnet as wn
 
 
 def calc_redability(pylinguistObj):
-    if pylinguistObj.language == "pt-br":
+    if pylinguistObj.language == "pt-br" or pylinguistObj.language == "pt":
         return flesch_port(pylinguistObj)
     else:
         return calc_flesch_kincaid_grade(pylinguistObj)
