@@ -76,3 +76,17 @@ Install
 
 (not working yet - We'll do it ASAP)
 pip install git+git://github.com/vwoloszyn/pylinguistics.git
+
+Paper 
+~~~~~~~~~~~~~
+https://www.lume.ufrgs.br/bitstream/handle/10183/147640/000999695.pdf?sequence=1
+
+Cite 
+~~~~~~~~~~~~~
+@phdthesis{da2016pylinguistics,
+  title={Pylinguistics: an open source library for readability assessment of texts written in Portuguese},
+  author={DA COMPUTA{\c{C}}{\~A}O, CURSO DE CI{\^E}NCIA},
+  year={2016},
+  school={UNIVERSIDADE FEDERAL DO RIO GRANDE DO SUL}
+}
+
