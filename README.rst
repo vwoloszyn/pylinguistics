@@ -77,11 +77,12 @@ Install
 (not working yet - We'll do it ASAP)
 pip install git+git://github.com/vwoloszyn/pylinguistics.git
 
-Paper 
+Publications
 ~~~~~~~~~~~~~
+http://www.fsma.edu.br/si/edicao18/FSMA_SI_2016_2_Principal_2_en.pdf
 https://www.lume.ufrgs.br/bitstream/handle/10183/147640/000999695.pdf?sequence=1
 
-Cite 
+How to cite 
 ~~~~~~~~~~~~~
 @phdthesis{da2016pylinguistics,
   title={Pylinguistics: an open source library for readability assessment of texts written in Portuguese},
@@ -90,3 +91,11 @@ Cite
   school={UNIVERSIDADE FEDERAL DO RIO GRANDE DO SUL}
 }
 
+@Article{Woloszyn2016,
+	author		= {Castilhos, S. and Woloszyn, V, and Barno, D. and Wives, L. K.},
+    title		= {Pylinguistics: an open source library for readability assessment of texts written in Portuguese},
+    journal		= {Revista de Sistemas de Informação da FSMA},
+    year		= {2016},
+    volume		= {18},
+    issn		= {1983-5604},
+}
