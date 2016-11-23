@@ -1,9 +1,7 @@
 Pylinguistics
 ~~~~~~~~~~~~~
 
-``Pylinguistics`` is computational linguistics tool inspired on http://cohmetrix.com/ that allows an analysis of cohesion, coherence of a text. In reading and comprehension process, the textual cohesion is an important characteristics that help the reader to mentally connect the ideas expressed in the text (Graesser, McNamara, & Louwerse, 2003). 
-
-``Pylinguistics`` is a biligual (Portuguese and English) and open source project that allow compute some readability metrics of the text..
+``Pylinguistics`` an open source tool to readability assessment of texts written in Portuguese and english.
 
 .. image:: https://travis-ci.org/vwoloszyn/pylinguistics.png?branch=master
         :target: https://travis-ci.org/vwoloszyn/pylinguistics
