@@ -86,9 +86,9 @@ How to cite
 ~~~~~~~~~~~~~
 Article{Woloszyn2016,
 	author		= {Castilhos, S. and Woloszyn, V, and Barno, D. and Wives, L. K.},
-    title		= {Pylinguistics: an open source library for readability assessment of texts written in Portuguese},
-    journal		= {Revista de Sistemas de Informação da FSMA},
-    year		= {2016},
-    volume		= {18},
-    issn		= {1983-5604},
+	title		= {Pylinguistics: an open source library for readability assessment of texts written in Portuguese},
+	journal		= {Revista de Sistemas de Informação da FSMA},
+	year		= {2016},
+	volume		= {18},
+	issn		= {1983-5604},
 }
