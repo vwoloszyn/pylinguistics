@@ -84,7 +84,7 @@ https://www.lume.ufrgs.br/bitstream/handle/10183/147640/000999695.pdf?sequence=1
 
 How to cite 
 ~~~~~~~~~~~~~
-@Article{Woloszyn2016,
+Article{Woloszyn2016,
 	author		= {Castilhos, S. and Woloszyn, V, and Barno, D. and Wives, L. K.},
     title		= {Pylinguistics: an open source library for readability assessment of texts written in Portuguese},
     journal		= {Revista de Sistemas de Informação da FSMA},
