@@ -84,13 +84,6 @@ https://www.lume.ufrgs.br/bitstream/handle/10183/147640/000999695.pdf?sequence=1
 
 How to cite 
 ~~~~~~~~~~~~~
-@phdthesis{da2016pylinguistics,
-  title={Pylinguistics: an open source library for readability assessment of texts written in Portuguese},
-  author={DA COMPUTA{\c{C}}{\~A}O, CURSO DE CI{\^E}NCIA},
-  year={2016},
-  school={UNIVERSIDADE FEDERAL DO RIO GRANDE DO SUL}
-}
-
 @Article{Woloszyn2016,
 	author		= {Castilhos, S. and Woloszyn, V, and Barno, D. and Wives, L. K.},
     title		= {Pylinguistics: an open source library for readability assessment of texts written in Portuguese},
