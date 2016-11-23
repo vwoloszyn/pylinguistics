@@ -77,7 +77,7 @@ pip install git+git://github.com/vwoloszyn/pylinguistics.git
 
 Publications
 ~~~~~~~~~~~~~
-http://www.fsma.edu.br/si/edicao18/FSMA_SI_2016_2_Principal_2_en.pdf
+http://www.fsma.edu.br/si/edicao18/FSMA_SI_2016_2_Principal_2_en.html
 https://www.lume.ufrgs.br/bitstream/handle/10183/147640/000999695.pdf?sequence=1
 
 How to cite 
