@@ -35,6 +35,7 @@ The project is still in developing process, but until now, we already have some 
 * Connective Logic Incidence
 * Connective Temporal Incidence
 * Connective Casual Incidence
+.... and more
 
 
 Basicic Usage
