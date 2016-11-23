@@ -1,7 +1,7 @@
 Pylinguistics
 ~~~~~~~~~~~~~
 
-``Pylinguistics`` an open source tool to readability assessment of texts written in Portuguese and english.
+``Pylinguistics`` an open source tool to readability assessment of texts written in Portuguese and English.
 
 .. image:: https://travis-ci.org/vwoloszyn/pylinguistics.png?branch=master
         :target: https://travis-ci.org/vwoloszyn/pylinguistics
