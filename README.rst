@@ -38,7 +38,7 @@ The project is still in developing process, but until now, we already have some 
 .... and more
 
 
-Case Study
+Case Study: Genre detection
 ~~~~~~~~~~~~~
 In order to illustrate the use of our tool, we contextualize a real world problem, the complexity and intelligibility of the scientific journalism. There are still few computational linguistic studies devoted to observe their textual constitution with particular emphasis on the characterization of stylistics elements of this textual genre. A thorough scientific journalism description can be extremely important for many of the core problems that computational linguists are concerned with. For example, parsing accuracy could be increased by taking genre into account, for instance, certain object-less constructions occur only in recipes in English. Similarly for POS-tagging, where the frequency of uses of trend as a verb in the Journal of Commerce is 35 times higher than in Sociological Abstracts. In information retrieval, genre classification could enable users to sort search results according to their immediate interests, for example scholarly articles about supercollider, novels about the French Revolution, and so forth.
 
@@ -46,6 +46,7 @@ The two corpora used in this study are geared towards different groups. Thus, th
 
 We then assessed the predictive power of our features based on 3 feature selection algorithms commonly used for text categorization: Information Gain, Gain Ratio and Chi-square. Figure 1 shows the performance of the SVM when varying the number of features selected for each method. It shows that with only 2 features we can already predict the genre with over 93% accuracy. Additionaly by 7 metrics it already reaches the best possible result (97%). Finding a small subset of predictors is important to avoid over-fitting.
 
+![alt tag](https://github.com/vwoloszyn/pylinguistics/blob/master/pylinguistics/resources/performance_genre_detection.png)
 
 Basicic Usage
 ~~~~~~~~~~~~~
