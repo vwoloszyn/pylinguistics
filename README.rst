@@ -46,7 +46,7 @@ The two corpora used in this study are geared towards different groups. Thus, th
 
 We then assessed the predictive power of our features based on 3 feature selection algorithms commonly used for text categorization: Information Gain, Gain Ratio and Chi-square. Figure 1 shows the performance of the SVM when varying the number of features selected for each method. It shows that with only 2 features we can already predict the genre with over 93% accuracy. Additionaly by 7 metrics it already reaches the best possible result (97%). Finding a small subset of predictors is important to avoid over-fitting.
 
-.. image:: (https://github.com/vwoloszyn/pylinguistics/blob/master/pylinguistics/resources/performance_genre_detection.png
+.. image:: https://github.com/vwoloszyn/pylinguistics/blob/master/pylinguistics/resources/performance_genre_detection.png
    :width: 200 px
    :scale: 50 %
    
