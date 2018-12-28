@@ -61,7 +61,7 @@ class pylinguistics:
                 
     def setLanguage(self, strLanguage):
         self.language=strLanguage
-        if self.language != "pt" or self.language != "en":
+        if self.language != "pt" and self.language != "en":
             self.language = "pt"
         print("language: %s" %self.language)
 
