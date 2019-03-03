@@ -4,3 +4,4 @@ numpy
 nltk
 nlpnet
 pandas
+h5py
