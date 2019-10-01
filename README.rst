@@ -1,6 +1,6 @@
-Pylinguistics
+Pylinguistics [English and Portuguese]
 ~~~~~~~~~~~~~
-Readability assessment is an important task in automatic text simplification that aims identify the text complexity by computing a set of metrics. In this project, we present the development and assessment of an open source library called Pylinguistics.
+eadability assessment is an important task for different NLP tasks, for instance automatic text simplification. In this project, we've designed an Open Source library for computing a set of readability metrics in Porguese and English.
 
 
 .. image:: https://travis-ci.org/vwoloszyn/pylinguistics.png?branch=master
