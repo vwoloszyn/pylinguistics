@@ -9,8 +9,6 @@ eadability assessment is an important task for different NLP tasks, for instance
 Metrics
 ~~~~~~~~~~~~~
 
-The project is still in developing process, but until now, we already have some functional metrics.
-
 * Word count
 * Sentence count
 * Word_per_sentence
