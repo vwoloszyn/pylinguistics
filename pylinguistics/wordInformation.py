@@ -1,5 +1,5 @@
 import nltk
-import tools
+from pylinguistics import tools
 
 # VERB - verbs (all tenses and modes)
 # NOUN - nouns (common and proper)
