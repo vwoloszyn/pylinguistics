@@ -1,5 +1,5 @@
 import nltk
-import tools
+from pylinguistics import tools
 from nltk.corpus import wordnet as wn
 
 

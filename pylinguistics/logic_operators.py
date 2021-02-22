@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-import tools
+from pylinguistics import tools
 
 
 

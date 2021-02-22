@@ -2,78 +2,70 @@
 # -*- coding: utf-8 -*-
 
 
+from pylinguistics import tools
+from pylinguistics import redability
+from pylinguistics import descriptive
+from pylinguistics import wordInformation
+from pylinguistics import disfluencies
+from pylinguistics import logic_operators
+from pylinguistics import connectives
 
-import tools
-import redability
-import descriptive
-import wordInformation
-import disfluencies
-import logic_operators
-import connectives
 
-
-def text(text,lang='pt-br'):
-    #print(text)
+def text(text, lang='pt-br'):
+    # print(text)
     pl = pylinguistics()
     pl.language = lang
     return pl.text(text)
 
+
 class pylinguistics:
 
     def __init__(self):
-        self.language="pt-br"
-        #text(self, text)
-        self.tokens=[]
-        self.types=[]
-        self.postag=[]
+        self.language = "pt-br"
+        # text(self, text)
+        self.tokens = []
+        self.types = []
+        self.postag = []
 
-        #return None
-
+        # return None
 
     def from_pos_tag(self, postag):
         for word, tag in tagged_text:
             self.tokens.append(word)
-        self.postag=postag
+        self.postag = postag
 
     def text(self, text):
-        self.types=[]
-        self.tokens=[]
-        self.postag=[]
+        self.types = []
+        self.tokens = []
+        self.postag = []
 
         self.text = text
-        #.decode('utf-8','ignore')
+        # .decode('utf-8','ignore')
         self.tokens = tools.getTokens(self)
 
-        #optimization
+        # optimization
         self.postag = tools.getPosTag(self)
 
-       
-        #Descriptive counts       
+        # Descriptive counts
         self.tokenized_sentences = descriptive.tokenized_sentences(self)
         self.word_count = descriptive.word_count(self)
         self.sentence_count = descriptive.sentence_count(self)
         self.avg_word_per_sentence = descriptive.avg_word_per_sentence(self)
-        #self.word_length = descriptive.word_length(self)                       #Doesn't work, for some reason
-        #self.syllable_count = descriptive.syllable_count(self)    
-        #self.avg_syllables_per_word = descriptive.avg_syllables_per_word(self)
+        # self.word_length = descriptive.word_length(self)                       #Doesn't work, for some reason
+        # self.syllable_count = descriptive.syllable_count(self)
+        # self.avg_syllables_per_word = descriptive.avg_syllables_per_word(self)
 
         return self
-                
+
     def setLanguage(self, strLanguage):
-        self.language=strLanguage
+        self.language = strLanguage
         if self.language != "pt" and self.language != "en":
             self.language = "pt"
-        print("language: %s" %self.language)
-
-
-
-
-
+        print("language: %s" % self.language)
 
     def getFeatures(self):
 
-
-        features={}
+        features = {}
 
         features['word_count'] = descriptive.word_count(self)
         features['sentence_count'] = descriptive.sentence_count(self)
@@ -96,12 +88,10 @@ class pylinguistics:
             features['percentile_50_word_length'] = descriptive.percentile_50_word_length(self)
             features['percentile_75_word_length'] = descriptive.percentile_75_word_length(self)
             features['percentile_90_word_length'] = descriptive.percentile_90_word_length(self)
-            #features['orthographic_neighborhood'] = descriptive.orthographic_neighborhood(self)
-            
+            # features['orthographic_neighborhood'] = descriptive.orthographic_neighborhood(self)
 
-        #features['word_length'] = descriptive.word_length(self)
-        #features['sentence_length'] = descriptive.sentence_length(self)
-
+        # features['word_length'] = descriptive.word_length(self)
+        # features['sentence_length'] = descriptive.sentence_length(self)
 
         features['adjectiveIncidence'] = wordInformation.adjectiveIncidence(self)
         features['nounIncidence'] = wordInformation.nounIncidence(self)
@@ -113,7 +103,7 @@ class pylinguistics:
         features['LexicalDiversty'] = wordInformation.typeTokensRatio(self)
         features['ContentDiversty'] = wordInformation.contentTokensRatio(self)
 
-        features['adpPronRatio'] = wordInformation.adpPronRatio(self) 
+        features['adpPronRatio'] = wordInformation.adpPronRatio(self)
 
         if self.word_count != 0:
             features['LogicNegationIncidence'] = logic_operators.LogicNegationIncidence(self)
@@ -128,20 +118,7 @@ class pylinguistics:
             features['ConnectiveTemporalIncidence'] = connectives.TemporalIncidence(self)
             features['ConnectiveCasualIncidence'] = connectives.CasualIncidence(self)
 
-            #features['contentDensity'] = self.contentDensity()
+            # features['contentDensity'] = self.contentDensity()
             features['redability'] = redability.calc_redability(self)
 
-        return features        
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return features

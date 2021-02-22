@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import nltk
-import tools
+from pylinguistics import tools
 import numpy as np
 
 

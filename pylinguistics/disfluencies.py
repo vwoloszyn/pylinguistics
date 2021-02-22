@@ -1,4 +1,4 @@
-import tools
+from pylinguistics import tools
 
 ###################################
 ##### Syntactic Pattern Density ###
