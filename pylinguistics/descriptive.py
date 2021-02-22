@@ -66,7 +66,7 @@ def orthographic_neighborhood (pylinguistObj):
 				if(array[index] == array[index+x]):
 					count = count + 1
 	
-	print count
+	print (count)
 	return count
 
 def tokenized_sentences (pylinguistObj):

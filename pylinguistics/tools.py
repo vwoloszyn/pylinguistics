@@ -6,25 +6,25 @@ import nltk.tag
 from nltk.tag.perceptron import PerceptronTagger
 from nltk.tokenize import sent_tokenize
 import re
-import os,sys
+import os, sys
 import shlex
 
 tagger = None
 
+
 def load_tagger(language):
-	print('LOAD TAGGER....')
-	global tagger
-	if (language=="en"):
-		tagger = PerceptronTagger()
-	elif (language=="pt-br"):
-		print('tagger pt-br')
+    print('LOAD TAGGER....')
+    global tagger
+    if (language == "en"):
+        tagger = PerceptronTagger()
+    elif (language == "pt-br"):
+        print('tagger pt-br')
 
-
-		import nlpnet
-		path = os.path.dirname(__file__) + '/resources/pos-pt/'
-		#print ('ciretori: %s' %path)
-		tagger = nlpnet.POSTagger(path, language='pt')
-		"""
+        import nlpnet
+        path = os.path.dirname(__file__) + '/resources/pos-pt/'
+        # print ('ciretori: %s' %path)
+        tagger = nlpnet.POSTagger(path, language='pt')
+        """
 		tagger = PerceptronTagger(load=False)
 		try:
 			print('Loading portuguese.pickle')
@@ -68,153 +68,150 @@ def load_tagger(language):
 		"""
 
 
-
-
 def getTypes(pylinguistObj):
-	dic_types={}
-	types=[]
-	for t in pylinguistObj.tokens:
-		dic_types[t]=1
+    dic_types = {}
+    types = []
+    for t in pylinguistObj.tokens:
+        dic_types[t] = 1
 
-	for w in dic_types:
-		types.append(w)
+    for w in dic_types:
+        types.append(w)
 
-	pylinguistObj.types = types
-	return types
+    pylinguistObj.types = types
+    return types
 
 
 def getTokens(pylinguistObj):
-	#try:
-		if (pylinguistObj.language == "pt-br"):
-			#Python understands the common character encoding used for Portuguese, ISO 8859-1 (ISO Latin 1).
-			#tokens = nltk.word_tokenize(clear_string(pylinguistObj.text.encode('utf-8','ignore').lower().decode('ascii','ignore'))
-			tokens = nltk.word_tokenize(pylinguistObj.text.lower())
-			#print (tokens)
-			#sys.exit(0)
-			return tokens
-			#.decode('iso-8859-1')
-		else:
+    # try:
+    if (pylinguistObj.language == "pt-br"):
+        # Python understands the common character encoding used for Portuguese, ISO 8859-1 (ISO Latin 1).
+        # tokens = nltk.word_tokenize(clear_string(pylinguistObj.text.encode('utf-8','ignore').lower().decode('ascii','ignore'))
+        tokens = nltk.word_tokenize(pylinguistObj.text.lower())
+        # print (tokens)
+        # sys.exit(0)
+        return tokens
+    # .decode('iso-8859-1')
+    else:
 
-			tokens = nltk.word_tokenize(pylinguistObj.text)
-			return tokens
-	#except:
-	#	return [] 
+        tokens = nltk.word_tokenize(pylinguistObj.text)
+        return tokens
 
-    #check lenght words
-    #tokens = [w.lower() for w in tokens if len(w)<20]
+
+# except:
+#	return []
+
+# check lenght words
+# tokens = [w.lower() for w in tokens if len(w)<20]
 
 
 def getPosTag(pylinguistObj):
+    # try:
+    if tagger is None:
+        load_tagger(pylinguistObj.language)
+
+    print(pylinguistObj.language)
+    # print('tokens')
+    # print(getTokens('hoje eu vou comer um sanduiche'))
+    # print(tagger.tag(getTokens('hoje eu vou comer um sanduiche')))
+
+    # print(pylinguistObj.tokens)
+    # tags=nltk.tag._pos_tag(pylinguistObj.tokens, None, tagger)
+    # print(pylinguistObj.tokens)
+
+    if (pylinguistObj.language == "pt-br" or pylinguistObj.language == "pt"):
+        sents = tagger.tag(pylinguistObj.text.lower())
+        # print(sent)
+        tags = []
+        tokens = []
+        idx = 0
+        for sent in sents:
+            for t in sent:
+                tags.append((t[0], str(t[1])))
+                tokens.append(t[0])
+                idx += 1
+        pylinguistObj.tokens = tokens
+        # VERB - verbs (all tenses and modes)
+        # NOUN - nouns (common and proper)
+        # PRON - pronouns
+        # ADJ - adjectives
+        # ADV - adverbs
+        # ADP - adpositions (prepositions and postpositions)
+        # CONJ - conjunctions
+        # DET - determiners
+        # NUM - cardinal numbers
+        # PRT - particles or other function words
+        # X - other: foreign words, typos, abbreviations
+        # . - punctuation
+
+        # retaging
+        # if (pylinguistObj.language=="pt-br"):
+        dic = {"PREP|+": "ADP", "ADJ": "ADJ", "ADV": "ADV", "ADV-KS": "ADV-KS", "ART": "DET", "ADV-KS-REL": "ADV",
+               "KC": "CONJ", "KS": "CONJ", "IN": "IN", "N": "NOUN", \
+               "NPROP": "NOUN", "NUM": "NUM", "PCP": "PRT", "PDEN": "X", "PREP": "ADP", "PROADJ": "PRON",
+               "PRO-KS": "PRO-KS", "PROPESS": "PRON", "PRO-KS-REL": "PRO-KS-REL", \
+               "PROSUB": "PRON", "V": "VERB", "VAUX": "VERB", "CUR": "X", "|EST": "X", "|AP": "X", "|DAD": "X",
+               "PREP+ART": "ADP", "PREP+PROPESS": "ADP", "PREP+ADV": "ADP", \
+               "PREP+PROADJ": "ADP", "PREP+PRO-KS-REL": "ADP", "PREP+PROSUB": "ADP", "PU": ".", "-": ".", ",": ".",
+               "N|DAT": "NUM", "PREP|+": "ADP"}
+
+        newtag = []
+        for c in tags:
+            newtag.append((c[0], dic.get(str(c[1]), str(c[1]))))
+
+        fixedtag = []
+        aux = "."
+
+        for c in newtag:
+            aux = c[1]
+            word = c[0].encode('utf-8')
+            if word == "“" or word == "’" or word == "‘" or word == "”":
+                aux = "."
+            fixedtag.append((c[0], aux))
 
 
-	#try:
-	if tagger is None:
-		load_tagger(pylinguistObj.language)
+    else:
+        tags = []
+        tags = tagger.tag(pylinguistObj.tokens)
 
-	print pylinguistObj.language
-	#print('tokens')
-	#print(getTokens('hoje eu vou comer um sanduiche'))
-	#print(tagger.tag(getTokens('hoje eu vou comer um sanduiche')))
+        dic = {"CC": "CONJ", "CD": "NUM", "DT": "DET", "EX": "PRT", "FW": "X", "IN": "ADP", "JJ": "ADJ", "JJR": "ADJ",
+               "JJS": "ADJ", "LS": ".", "MD": "VERB", "NN": "NOUN", "NNS": "NOUN", \
+               "NNP": "NOUN", "NNPS": "NOUN", "PDT": "DET", "POS": "ADP", "PRP": "PRON", "PRP$": "PRON", "RB": "ADV",
+               "RBR": "ADV", "RBS": "ADV", "RP": "PRT", "SYM": ".", "TO": "ADP", \
+               "UH": "X", "VB": "VERB", "VBD": "VERB", "VBG": "VERB", "VBN": "VERB", "VBP": "VERB", "VBZ": "VERB",
+               "WDT": "PRON", "WP": "PRON", "WP$": "PRON", "WRB": "ADV"}
 
+        newtag = []
+        for c in tags:
+            newtag.append((c[0], dic.get(str(c[1]), str(c[1]))))
+        fixedtag = newtag
+    # print fixedtag
 
-	#print(pylinguistObj.tokens)
-	#tags=nltk.tag._pos_tag(pylinguistObj.tokens, None, tagger)
-	#print(pylinguistObj.tokens)
-
-
-
-	if (pylinguistObj.language == "pt-br" or pylinguistObj.language == "pt"):
-		sents =tagger.tag(pylinguistObj.text.lower())
-		#print(sent)
-		tags=[]
-		tokens=[]
-		idx=0
-		for sent in sents:
-			for t in sent:
-				tags.append((t[0],str(t[1])))
-				tokens.append(t[0])
-				idx+=1
-		pylinguistObj.tokens=tokens
-			# VERB - verbs (all tenses and modes)
-			# NOUN - nouns (common and proper)
-			# PRON - pronouns
-			# ADJ - adjectives
-			# ADV - adverbs
-			# ADP - adpositions (prepositions and postpositions)
-			# CONJ - conjunctions
-			# DET - determiners
-			# NUM - cardinal numbers
-			# PRT - particles or other function words
-			# X - other: foreign words, typos, abbreviations
-			# . - punctuation
-
-		#retaging
-		#if (pylinguistObj.language=="pt-br"):
-		dic ={"PREP|+":"ADP","ADJ":"ADJ","ADV":"ADV","ADV-KS":"ADV-KS","ART":"DET","ADV-KS-REL":"ADV","KC":"CONJ","KS":"CONJ","IN":"IN","N":"NOUN",\
-			"NPROP":"NOUN","NUM":"NUM","PCP":"PRT","PDEN":"X","PREP":"ADP","PROADJ":"PRON","PRO-KS":"PRO-KS","PROPESS":"PRON","PRO-KS-REL":"PRO-KS-REL",\
-			"PROSUB":"PRON","V":"VERB","VAUX":"VERB","CUR":"X","|EST":"X","|AP":"X","|DAD":"X","PREP+ART":"ADP","PREP+PROPESS":"ADP","PREP+ADV":"ADP",\
-			"PREP+PROADJ":"ADP","PREP+PRO-KS-REL":"ADP","PREP+PROSUB":"ADP","PU":".","-":".",",":".","N|DAT":"NUM","PREP|+":"ADP"}
-
-		newtag = []
-		for c in tags:
-			newtag.append((c[0], dic.get(str(c[1]),str(c[1]))))
-
-		fixedtag = []
-		aux = "."
-
-		for c in newtag:
-			aux = c[1]
-			word = c[0].encode('utf-8')
-			if word == "“" or word == "’" or word == "‘" or word == "”":
-				aux = "."
-			fixedtag.append((c[0], aux))
+    return fixedtag
 
 
-	else:
-		tags=[]
-		tags = tagger.tag(pylinguistObj.tokens)
-
-
-		dic = {"CC":"CONJ","CD":"NUM","DT":"DET","EX":"PRT","FW":"X","IN":"ADP","JJ":"ADJ","JJR":"ADJ","JJS":"ADJ","LS":".","MD":"VERB","NN":"NOUN","NNS":"NOUN",\
-			"NNP":"NOUN","NNPS":"NOUN","PDT":"DET","POS":"ADP","PRP":"PRON","PRP$":"PRON","RB":"ADV","RBR":"ADV","RBS":"ADV","RP":"PRT","SYM":".","TO":"ADP",\
-			"UH":"X","VB":"VERB","VBD":"VERB","VBG":"VERB","VBN":"VERB","VBP":"VERB","VBZ":"VERB","WDT":"PRON","WP":"PRON","WP$":"PRON","WRB":"ADV"}
-
-		newtag = []
-		for c in tags:
-			newtag.append((c[0], dic.get(str(c[1]),str(c[1]))))
-		fixedtag = newtag
-	#print fixedtag
-
-
-	return fixedtag
-	#except:
-	#	print('error on getPosTag')
-	#	return []
-
-
-
-
-
-
+# except:
+#	print('error on getPosTag')
+#	return []
 
 
 def clear_string(value):
-	#value=""
-	#for c in string:
-	#print('c:'+c)
-	#replaced+=dic.get(c,c)
-	value = re.sub('à', "a", value)
-	value = re.sub('é', "e", value)
-	value = re.sub('ã', "a", value)
-	value = re.sub('%', "Porc", value)
-	value = re.sub('ó', "o", value)
-	value = re.sub('í', "i", value)
-	value = re.sub('ê', "e", value)
-	value = re.sub('ç', "c", value)
-	value = re.sub('õ', "o", value)
-	value = re.sub('ú', "u", value)
-	value = re.sub('á', "a", value)
-	#value = re.sub('\`', "", value)
-	#value = re.sub('\'', "", value)
+    # value=""
+    # for c in string:
+    # print('c:'+c)
+    # replaced+=dic.get(c,c)
+    value = str(value)
+    value = re.sub('à', "a", value)
+    value = re.sub('é', "e", value)
+    value = re.sub('ã', "a", value)
+    value = re.sub('%', "Porc", value)
+    value = re.sub('ó', "o", value)
+    value = re.sub('í', "i", value)
+    value = re.sub('ê', "e", value)
+    value = re.sub('ç', "c", value)
+    value = re.sub('õ', "o", value)
+    value = re.sub('ú', "u", value)
+    value = re.sub('á', "a", value)
+    # value = re.sub('\`', "", value)
+    # value = re.sub('\'', "", value)
 
-	return value
+    return value
