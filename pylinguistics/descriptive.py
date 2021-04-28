@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import nltk
-from pylinguistics import tools
+from . import tools
 import numpy as np
 
 
@@ -201,7 +201,7 @@ def word_length(pylinguistObj):
     if (pylinguistObj.language == "pt"):
         # from source.syllable import silva2011
         # import source.syllable.silva2011
-        from resources.syllable.silva2011 import syllable_separator
+        from .resources.syllable.silva2011 import syllable_separator
 
         array = []
         count_error = 0
@@ -307,7 +307,7 @@ def syllable_count(pylinguistObj):
     if (pylinguistObj.language == "pt"):
         # from source.syllable import silva2011
         # import source.syllable.silva2011
-        from resources.syllable.silva2011 import syllable_separator
+        from .resources.syllable.silva2011 import syllable_separator
         count = 0
         count_error = 0
         for w in pylinguistObj.tokens:

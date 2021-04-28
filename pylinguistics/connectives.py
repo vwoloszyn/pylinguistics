@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 
-from pylinguistics import tools
+from . import tools
 
 
 # VERB - verbs (all tenses and modes)

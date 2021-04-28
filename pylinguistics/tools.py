@@ -13,12 +13,12 @@ tagger = None
 
 
 def load_tagger(language):
-    print('LOAD TAGGER....')
+    # print('LOAD TAGGER....')
     global tagger
     if (language == "en"):
         tagger = PerceptronTagger()
     elif (language == "pt-br"):
-        print('tagger pt-br')
+        # print('tagger pt-br')
 
         import nlpnet
         path = os.path.dirname(__file__) + '/resources/pos-pt/'
@@ -48,19 +48,19 @@ def load_tagger(language):
 			print ('Corpus lenght:%i' %len(tsents))
 
 			train = sentences[int(len(sentences)*0.7):]
-			test = sentences[:int(len(sentences)*0.3)]
+			simplified = sentences[:int(len(sentences)*0.3)]
 
 			#train = sentences[90000:]
-			#test = sentences[:10000]
+			#simplified = sentences[:10000]
 
 			#tagger0 = nltk.DefaultTagger('n')
 			#tagger1 = nltk.UnigramTagger(train, backoff=tagger0)
 			#tagger2 = nltk.BigramTagger(train, backoff=tagger1)
-			#evaluate=tagger2.evaluate(test)
+			#evaluate=tagger2.evaluate(simplified)
 			
 			
 			tagger.train(train, 'portuguese_tags.pickle')
-			evaluate=tagger.evaluate(test)
+			evaluate=tagger.evaluate(simplified)
 
 			print('Model accuracy:%f' %evaluate)
 
@@ -109,7 +109,7 @@ def getPosTag(pylinguistObj):
     if tagger is None:
         load_tagger(pylinguistObj.language)
 
-    print(pylinguistObj.language)
+    #print(pylinguistObj.language)
     # print('tokens')
     # print(getTokens('hoje eu vou comer um sanduiche'))
     # print(tagger.tag(getTokens('hoje eu vou comer um sanduiche')))

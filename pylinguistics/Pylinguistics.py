@@ -2,13 +2,12 @@
 # -*- coding: utf-8 -*-
 
 
-from pylinguistics import tools
-from pylinguistics import redability
-from pylinguistics import descriptive
-from pylinguistics import wordInformation
-from pylinguistics import disfluencies
-from pylinguistics import logic_operators
-from pylinguistics import connectives
+from . import tools
+from . import redability
+from . import descriptive
+from . import wordInformation
+from . import logic_operators
+from . import connectives
 
 
 def text(text, lang='pt-br'):
@@ -61,7 +60,7 @@ class pylinguistics:
         self.language = strLanguage
         if self.language != "pt" and self.language != "en":
             self.language = "pt"
-        print("language: %s" % self.language)
+
 
     def getFeatures(self):
 

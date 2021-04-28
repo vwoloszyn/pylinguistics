@@ -8,7 +8,7 @@ install:
   - python install.py
 
 script:
-  - python test.py
+  - python simplified.py
 
 notifications:
   email:

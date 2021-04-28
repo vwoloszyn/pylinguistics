@@ -79,7 +79,7 @@ class Silva2011SyllableSeparator(SyllableSeparator):
         k = 0
         c = 0  # Count hyfens
 
-        # Just to pass the Biderman test.
+        # Just to pass the Biderman simplified.
         if len(w) == 1:
             return [w]
 
@@ -581,9 +581,9 @@ class Silva2011SyllableSeparator(SyllableSeparator):
 
     def _test(self):
         import codecs
-        with codecs.open('./test/biderman-UTF-8.txt',
+        with codecs.open('./simplified/biderman-UTF-8.txt',
                          encoding='utf-8', mode='r') as content_file,\
-            codecs.open('./test/biderman_output.txt',
+            codecs.open('./simplified/biderman_output.txt',
                         encoding='utf-8', mode='w') as output_file:
 
             content = content_file.read()
